@@ -65,6 +65,22 @@ namespace ProjetCUBES.Controllers
                 Employer employer = new Employer("admin", "admin12", "patron", "patron", 1);
                 context.Add(employer);
                 context.SaveChanges();
+                List<Employer> list = new List<Employer>();
+
+                for (int i = 0; i < 35; i++)
+                {
+                    string a = Faker.Name.First();
+                    Employer use = new Employer(Faker.Internet.Email(a), GetRandomPassword(8), Faker.Name.Last(), a, Faker.RandomNumber.Next(2, 4));
+
+                    list.Add(use);
+                }
+
+
+                foreach (Employer emp in list)
+                {
+                    context.Add(emp);
+                    context.SaveChanges();
+                }
 
 
             }
@@ -74,9 +90,17 @@ namespace ProjetCUBES.Controllers
         {
             using (Apply context = new Apply())
             {
-                Job job = new Job("Gérant");
-                context.Add(job);
-                context.SaveChanges();
+                List<Job> list = new List<Job>();
+                list.Add(new Job("Gérant"));
+                list.Add(new Job("Gestionnaire"));
+                list.Add(new Job("Inventoriste"));
+                list.Add(new Job("Passeur de commande"));
+                foreach(Job job in list)
+                {
+                    context.Add(job);
+                    context.SaveChanges();
+                }
+                
             }
         }
 

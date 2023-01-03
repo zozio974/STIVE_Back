@@ -191,7 +191,7 @@ namespace ProjetCUBES.Controllers
             using (Apply context = new Apply())
             {
                 Supplier sup = context.Suppliers.Where(x => x.Id == id).First();
-                return sup.Id.ToString();
+                return sup.Name.ToString();
             }
         }
     }

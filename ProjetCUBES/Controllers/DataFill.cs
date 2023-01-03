@@ -224,10 +224,6 @@ namespace ProjetCUBES.Controllers
                 "village",
                 "village",
                 "village",
-                "",
-                "",
-                "",
-                "",
             };
 
 

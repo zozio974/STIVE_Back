@@ -176,5 +176,23 @@ namespace ProjetCUBES.Controllers
                 return sup.Id.ToString();
             }
         }
+        [HttpGet]
+        public string getnamefamily(int id)
+        {
+            using (Apply context = new Apply())
+            {
+                Family fam = context.Familys.Where(x => x.ID_Family == id).First();
+                return fam.NameFamily.ToString();
+            }
+        }
+        [HttpGet]
+        public string getnamesupplier(int id)
+        {
+            using (Apply context = new Apply())
+            {
+                Supplier sup = context.Suppliers.Where(x => x.Id == id).First();
+                return sup.Id.ToString();
+            }
+        }
     }
 }

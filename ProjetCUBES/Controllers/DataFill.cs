@@ -67,7 +67,7 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
                 List<Employer> list = new List<Employer>();
 
-                for (int i = 0; i < 35; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     string a = Faker.Name.First();
                     Employer use = new Employer(Faker.Internet.Email(a), GetRandomPassword(8), Faker.Name.Last(), a, Faker.RandomNumber.Next(2, 4));

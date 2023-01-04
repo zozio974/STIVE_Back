@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjetCUBES.Model;
 using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using static ProjetCUBES.Helpers.Class;
 namespace ProjetCUBES.Controllers
@@ -168,6 +169,15 @@ namespace ProjetCUBES.Controllers
             }
         }
         [HttpGet]
+        public string getidjob(string name)
+        {
+            using (Apply context = new Apply())
+            {
+                Job job = context.Jobs.Where(x => x.JobName == name).First();
+                return job.ID_Job.ToString();
+            }
+        }
+        [HttpGet]
         public string getidsupplier(string name)
         {
             using (Apply context = new Apply())
@@ -194,5 +204,58 @@ namespace ProjetCUBES.Controllers
                 return sup.Name.ToString();
             }
         }
+        [HttpGet]
+        public string getnamejob(int id)
+        {
+            using (Apply context = new Apply())
+            {
+                Job job = context.Jobs.Where(x => x.ID_Job == id).First();
+                return job.JobName.ToString();
+            }
+        }
+        [HttpGet]
+        public List<string> getlistnamesup([FromQuery] int[] listOfIds)
+        {
+            using (Apply context = new Apply())
+            {
+                List<string> list1 = new List<string>();
+                foreach (int s in listOfIds)
+                {
+                    list1.Add(getnamesupplier(s).ToString());
+                }
+                return list1;
+            }
+        }
+        [HttpGet]
+        public List<string> getlistnamefam([FromQuery] int[] listOfIds)
+        {
+            using (Apply context = new Apply())
+            {
+                List<string> list1 = new List<string>();
+                foreach (int s in listOfIds)
+                {
+                    list1.Add(getnamefamily(s).ToString());
+                }
+                return list1;
+            }
+        }
+        [HttpGet]
+        public List<string> getlistnamejob([FromQuery] int[] listOfIds)
+        {
+            using (Apply context = new Apply())
+            {
+                List<string> list1 = new List<string>();
+                foreach (int s in listOfIds)
+                {
+                    list1.Add(getnamejob(s).ToString());
+                }
+                return list1;
+            }
+        }
+
+
+
+
+
     }
 }

@@ -41,8 +41,9 @@ namespace ProjetCUBES.Controllers
                 List<Article> article = context.Articles.Where(x => x.NameArticle == name).ToList();
                 return article;
             }
-
         }
+
+
         [HttpGet]
 
         public List<Customer> displaycustomers()

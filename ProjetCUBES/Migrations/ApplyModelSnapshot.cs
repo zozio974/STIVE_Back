@@ -199,6 +199,21 @@ namespace ProjetCUBES.Migrations
                     b.ToTable("LineCommands");
                 });
 
+            modelBuilder.Entity("ProjetCUBES.Model.StatusCommand", b =>
+                {
+                    b.Property<int>("Id_StatusCommand")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id_StatusCommand");
+
+                    b.ToTable("StatusCommands");
+                });
+
             modelBuilder.Entity("ProjetCUBES.Model.Stock", b =>
                 {
                     b.Property<int>("ID_Stock")
@@ -212,6 +227,9 @@ namespace ProjetCUBES.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("StockMin")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockProv")
                         .HasColumnType("int");
 
                     b.HasKey("ID_Stock");

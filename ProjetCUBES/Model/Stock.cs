@@ -12,14 +12,15 @@ namespace ProjetCUBES.Model
         [Required]
         public int StockActual { get; set;}
         [Required]
-        public int StockMin { get; set; }
-       
-
+        public int StockProv { get; set; }
+        [Required]
+        public int StockMin { get; set; }       
         public Stock() { }
-        public Stock(int idarticle,int stockactual, int stockmin)
+        public Stock(int idarticle,int stockactual,int stockprov, int stockmin)
         {
             IdArticle= idarticle;
             StockActual = stockactual;
+            StockProv = stockprov;
             StockMin = stockmin;
             
         }

@@ -41,18 +41,21 @@ namespace ProjetCUBES.Controllers
                 lineCommandCust.Price = quant * article.PriceSup;
                 context.Add(lineCommandCust);
                 context.SaveChanges();
+
+                Stock stock = context.Stocks.Where(x => x.IdArticle == idart).First();
+                stock.StockProv += quant;
             }
         }
 
         [HttpPost]
-        public void addcommand(int refcom,int status)
+        public void addcommand(int refcom)
         { 
             using (Apply context = new Apply())
             {
                 double a = 0;
                 Model.Command command = new Model.Command();
                 command.RefCommand = refcom;
-                command.Status_Comman = status;
+                command.Status_Comman = 1;
                 command.Date_Command = DateTime.Now.ToString("MM/dd/yyyy");
                 List<LineCommand> line = context.LineCommands.Where(x => x.Ref_Command == refcom).ToList();
                 foreach (LineCommand lineCom in line)

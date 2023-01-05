@@ -252,7 +252,19 @@ namespace ProjetCUBES.Controllers
                 return list1;
             }
         }
-
+        [HttpGet]
+        public List<Article> getlistarticleinstock([FromQuery] int[] listOfIds)
+        {
+            using (Apply context = new Apply())
+            {
+                List<Article> list1 = new List<Article>();
+                foreach (int s in listOfIds)
+                {
+                    list1.Add(displayarticlebyid(s));
+                }
+                return list1;
+            }
+        }
 
 
 

@@ -18,6 +18,7 @@ namespace ProjetCUBES.Helpers
             public DbSet<Stock> Stocks { get; set; }
             public DbSet<Command> Commands { get; set; }
             public DbSet<LineCommand> LineCommands { get; set; }
+            public DbSet<StatusCommand> StatusCommands { get; set; }
 
 
 

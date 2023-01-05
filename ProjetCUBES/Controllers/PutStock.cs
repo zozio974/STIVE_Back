@@ -123,5 +123,17 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
+        [HttpPut]
+        public void putstock(int idstock, int i)
+        {
+            using (Apply context = new Apply())
+            {
+                Stock stock = context.Stocks.Where(x => x.ID_Stock == idstock).First();
+                stock.StockProv = i;
+                stock.StockActual = i;
+                context.Update(stock);
+                context.SaveChanges();
+            }
+        }
     }
 }

@@ -27,12 +27,13 @@ namespace ProjetCUBES.Controllers
                 return article;
             }
         }
+        [HttpGet]
 
-        public List<Article> displayarticlebySupplier(int IDSupplier)
+        public List<Article> displayarticlebySupplier(int ID)
         {
             using (Apply context = new Apply())
             {
-                List<Article> article = context.Articles.Where(x => x.IdProvider == IDSupplier).ToList();
+                List<Article> article = context.Articles.Where(x => x.IdProvider == ID).ToList();
                 return article;
             }
         }

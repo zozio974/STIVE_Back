@@ -34,6 +34,7 @@ namespace ProjetCUBES.Controllers
             FillSupplier();
             FillArticle();
             FillStock();
+            FillStatusCommand();
         }
         public static void FillCustomer()
         {
@@ -305,7 +306,8 @@ namespace ProjetCUBES.Controllers
                 {
                     string a = Faker.Name.First();
                     int c = Faker.RandomNumber.Next(2, 15);
-                    Stock use = new Stock(i, Faker.RandomNumber.Next(c, 100), c);
+                    int d = Faker.RandomNumber.Next(c, 100);
+                    Stock use = new Stock(i, d,d, c);
                     list.Add(use);
                     x= Faker.RandomNumber.Next(1, 5);
                 }
@@ -314,6 +316,24 @@ namespace ProjetCUBES.Controllers
                 foreach (Stock sto in list)
                 {
                     context.Add(sto);
+                    context.SaveChanges();
+                }
+            }
+        }
+        public static void FillStatusCommand()
+        {
+            using (Apply context = new Apply())
+            {
+                List<StatusCommand> list = new List<StatusCommand>();
+
+                list.Add(new StatusCommand("En cours"));
+                list.Add(new StatusCommand("Validé"));
+                
+                
+
+                foreach (StatusCommand stat in list)
+                {
+                    context.Add(stat);
                     context.SaveChanges();
                 }
             }

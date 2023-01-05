@@ -148,6 +148,21 @@ namespace ProjetCUBES.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "StatusCommands",
+                columns: table => new
+                {
+                    Id_StatusCommand = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StatusCommands", x => x.Id_StatusCommand);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Stocks",
                 columns: table => new
                 {
@@ -155,6 +170,7 @@ namespace ProjetCUBES.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     IdArticle = table.Column<int>(type: "int", nullable: false),
                     StockActual = table.Column<int>(type: "int", nullable: false),
+                    StockProv = table.Column<int>(type: "int", nullable: false),
                     StockMin = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -201,6 +217,9 @@ namespace ProjetCUBES.Migrations
 
             migrationBuilder.DropTable(
                 name: "LineCommands");
+
+            migrationBuilder.DropTable(
+                name: "StatusCommands");
 
             migrationBuilder.DropTable(
                 name: "Stocks");

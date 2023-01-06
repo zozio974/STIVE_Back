@@ -37,5 +37,15 @@ namespace ProjetCUBES.Controllers
                 return article;
             }
         }
+        [HttpGet]
+
+        public List<Article> displayarticlebySupFam(int idsup,int idfam)
+        {
+            using (Apply context = new Apply())
+            {
+                List<Article> article = context.Articles.Where(x => x.IdProvider == idsup &&  x.IdFamily ==idfam).ToList();
+                return article;
+            }
+        }
     }
 }

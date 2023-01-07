@@ -42,7 +42,7 @@ namespace ProjetCUBES.Controllers
                 context.Add(lineCommandCust);
                 context.SaveChanges();
 
-                Stock stock = context.Stocks.Where(x => x.IdArticle == idart).First();
+                Article stock = context.Articles.Where(x => x.ID_Article == idart).First();
                 stock.StockProv += quant;
             }
         }

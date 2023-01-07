@@ -103,25 +103,7 @@ namespace ProjetCUBES.Controllers
 
         }
         
-        [HttpGet]
-        public List<Stock> displaystock()
-        {
-            using (Apply context = new Apply())
-            {
-                List<Stock> stock = context.Stocks.ToList();
-                return stock;
-            }
-        }
-        [HttpGet]
-        public List<Stock> displaystockbyidart(int id)
-        {
-            using (Apply context = new Apply())
-            {
-                List<Stock> stock = context.Stocks.Where(x => x.StockActual ==id).ToList();
-                return stock;
-            }
-
-        }
+       
         [HttpGet]
         public List<Job> displayjob()
         {
@@ -266,7 +248,9 @@ namespace ProjetCUBES.Controllers
                 return list1;
             }
         }
-
+        
+        
+        
 
 
 

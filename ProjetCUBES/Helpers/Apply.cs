@@ -15,7 +15,6 @@ namespace ProjetCUBES.Helpers
             public DbSet<Supplier> Suppliers { get; set; }
             public DbSet<Employer> Employers { get; set; }
             public DbSet<Job> Jobs { get; set; }
-            public DbSet<Stock> Stocks { get; set; }
             public DbSet<Command> Commands { get; set; }
             public DbSet<LineCommand> LineCommands { get; set; }
             public DbSet<StatusCommand> StatusCommands { get; set; }

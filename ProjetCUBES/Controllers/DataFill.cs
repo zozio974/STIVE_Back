@@ -33,7 +33,7 @@ namespace ProjetCUBES.Controllers
             FillEmployer();
             FillSupplier();
             FillArticle();
-            FillStock();
+            
             FillStatusCommand();
         }
         public static void FillCustomer()
@@ -64,7 +64,13 @@ namespace ProjetCUBES.Controllers
             using (Apply context = new Apply())
             {
                 Employer employer = new Employer("admin", "admin12", "patron", "patron", 1);
+                Employer employer1 = new Employer("gestion", "gestion", "gestion", "gestion", 2);
+                Employer employer2 = new Employer("inventaire", "inventaire", "inventaire", "inventaire", 3);
+                Employer employer3 = new Employer("commande", "commande", "commande", "commande", 4);
                 context.Add(employer);
+                context.Add(employer1);
+                context.Add(employer2);
+                context.Add(employer3);
                 context.SaveChanges();
                 List<Employer> list = new List<Employer>();
 
@@ -264,12 +270,19 @@ namespace ProjetCUBES.Controllers
                     int b = Faker.RandomNumber.Next(0, grapelist.Length-1);
                     int c = Faker.RandomNumber.Next(0, ladderlist.Length - 1);
                     double d = Faker.RandomNumber.Next(7, 40);
-                    Article use = new Article(winelist[a],Faker.RandomNumber.Next(1,5), Faker.RandomNumber.Next(2015,2022), Faker.RandomNumber.Next(1, 5), d,d+5,75,Faker.RandomNumber.Next(12, 15), grapelist[b], ladderlist[c]);
+                    Article use = new Article(winelist[a],Faker.RandomNumber.Next(1,5), Faker.RandomNumber.Next(2015,2022), Faker.RandomNumber.Next(1, 5), d,d+5,75,Faker.RandomNumber.Next(12, 15), grapelist[b], ladderlist[c],0,0,10);
 
                     list.Add(use);
                 }
+                
                 foreach (Article art in list)
                 {
+                    if(Faker.RandomNumber.Next(1,3)== Faker.RandomNumber.Next(1, 3))
+                    {
+                        int a = Faker.RandomNumber.Next(15, 100);
+                        art.StockActual= a;
+                        art.StockProv = a;
+                    }
                     context.Add(art);
                     context.SaveChanges();
                 }
@@ -296,30 +309,7 @@ namespace ProjetCUBES.Controllers
             }
         }
 
-        public static void FillStock()
-        {
-            using (Apply context = new Apply())
-            {
-                List<Stock> list = new List<Stock>();
-                int x = Faker.RandomNumber.Next(1, 5);
-                for (int i = 1; i < 100; i=i+x)
-                {
-                    string a = Faker.Name.First();
-                    int c = Faker.RandomNumber.Next(2, 15);
-                    int d = Faker.RandomNumber.Next(c, 100);
-                    Stock use = new Stock(i, d,d, c);
-                    list.Add(use);
-                    x= Faker.RandomNumber.Next(1, 5);
-                }
-
-
-                foreach (Stock sto in list)
-                {
-                    context.Add(sto);
-                    context.SaveChanges();
-                }
-            }
-        }
+      
         public static void FillStatusCommand()
         {
             using (Apply context = new Apply())

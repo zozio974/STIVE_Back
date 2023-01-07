@@ -30,7 +30,10 @@ namespace ProjetCUBES.Migrations
                     Grape = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Ladder = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    StockActual = table.Column<int>(type: "int", nullable: false),
+                    StockProv = table.Column<int>(type: "int", nullable: false),
+                    StockMin = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -163,23 +166,6 @@ namespace ProjetCUBES.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Stocks",
-                columns: table => new
-                {
-                    ID_Stock = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    IdArticle = table.Column<int>(type: "int", nullable: false),
-                    StockActual = table.Column<int>(type: "int", nullable: false),
-                    StockProv = table.Column<int>(type: "int", nullable: false),
-                    StockMin = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Stocks", x => x.ID_Stock);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Suppliers",
                 columns: table => new
                 {
@@ -220,9 +206,6 @@ namespace ProjetCUBES.Migrations
 
             migrationBuilder.DropTable(
                 name: "StatusCommands");
-
-            migrationBuilder.DropTable(
-                name: "Stocks");
 
             migrationBuilder.DropTable(
                 name: "Suppliers");

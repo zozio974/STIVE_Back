@@ -54,6 +54,15 @@ namespace ProjetCUBES.Migrations
                     b.Property<double>("PriceSup")
                         .HasColumnType("double");
 
+                    b.Property<int>("StockActual")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockMin")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StockProv")
+                        .HasColumnType("int");
+
                     b.Property<int>("Volume")
                         .HasColumnType("int");
 
@@ -212,29 +221,6 @@ namespace ProjetCUBES.Migrations
                     b.HasKey("Id_StatusCommand");
 
                     b.ToTable("StatusCommands");
-                });
-
-            modelBuilder.Entity("ProjetCUBES.Model.Stock", b =>
-                {
-                    b.Property<int>("ID_Stock")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdArticle")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StockActual")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StockMin")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StockProv")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID_Stock");
-
-                    b.ToTable("Stocks");
                 });
 
             modelBuilder.Entity("ProjetCUBES.Model.Supplier", b =>

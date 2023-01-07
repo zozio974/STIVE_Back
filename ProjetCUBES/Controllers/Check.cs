@@ -54,12 +54,13 @@ namespace ProjetCUBES.Controllers
             }
         }
         [HttpGet]
-        public bool checkarticlestockexist(int a)
+
+        public bool articlebynameexist(string name)
         {
             using (Apply context = new Apply())
             {
-                List<Stock> liststock = context.Stocks.Where((x => x.IdArticle == a)).ToList();
-                if (liststock.Any() == false)
+                List<Article> article = context.Articles.Where(x => x.NameArticle == name).ToList();
+                if (article.Any() == false)
                 {
                     return false;
                 }

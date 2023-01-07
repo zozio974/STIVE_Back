@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ProjetCUBES.Model
 {
@@ -29,12 +30,18 @@ namespace ProjetCUBES.Model
         public int Degree { get; set; }
         [Required]
         public string Grape { get; set; }
-        [Required]
+       
         public string Ladder { get; set; }
+        [Required]
+        public int StockActual { get; set; }
+        [Required]
+        public int StockProv { get; set; }
+        [Required]
+        public int StockMin { get; set; }
 
         public Article() { }
 
-        public Article(string nameArticle, int idProvider, int dateFill, int idFamily,double pricesup, double price, int volume, int degree, string grape, string ladder)
+        public Article(string nameArticle, int idProvider, int dateFill, int idFamily,double pricesup, double price, int volume, int degree, string grape, string ladder,int stockactual,int stockprov,int stockmin)
         {
             NameArticle = nameArticle;
             IdProvider = idProvider;
@@ -46,6 +53,9 @@ namespace ProjetCUBES.Model
             Degree = degree;
             Grape = grape;
             Ladder = ladder;
+            StockActual = stockactual;
+            StockProv = stockprov;
+            StockMin = stockmin;
         }
 
 

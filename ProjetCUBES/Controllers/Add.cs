@@ -103,6 +103,9 @@ namespace ProjetCUBES.Controllers
                 newart.Degree= degree;
                 newart.Grape= grape;
                 newart.Ladder= ladder;
+                newart.StockProv = 0;
+                newart.StockActual = 0;
+                newart.StockMin = 10;
                 context.Add(newart);
                 context.SaveChanges();
             }

@@ -49,6 +49,15 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+        [HttpGet]
+        public Employer getjobbylogin(string name)
+        {
+            using (Apply context = new Apply())
+            {
+                Employer emp = context.Employers.Where(x => x.LogInEmp == name).First();
+                return emp;
+            }
+        }
 
     }
 }

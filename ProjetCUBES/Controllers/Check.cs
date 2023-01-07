@@ -67,5 +67,19 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+        [HttpGet]
+
+        public bool checkarticlestockexist(int a)
+        {
+            using (Apply context = new Apply())
+            {
+               Article article = context.Articles.Where(x => x.ID_Article == a).First();
+                if (article.StockProv == 0)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
     }
 }

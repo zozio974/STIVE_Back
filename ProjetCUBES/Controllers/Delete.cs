@@ -13,25 +13,16 @@ namespace ProjetCUBES.Controllers
     public class Delete
     {
         [HttpDelete]
-        public void delete_cust(int ID)
+        public void delete_user(int ID)
         {
             using (Apply context = new Apply())
             {
-                Customer cust = context.Customers.Where(x => x.ID_Customer == ID).First();
+                User cust = context.Users.Where(x => x.ID_User == ID).First();
                 context.Remove(cust);
                 context.SaveChanges();
             }
         }
-        [HttpDelete]
-        public void delete_emp(int ID)
-        {
-            using (Apply context = new Apply())
-            {
-                Employer emp = context.Employers.Where(x => x.ID_Employer == ID).First();
-                context.Remove(emp);
-                context.SaveChanges();
-            }
-        }
+       
         [HttpDelete]
         public void delete_family(int ID)
         {

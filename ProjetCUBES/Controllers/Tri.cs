@@ -47,5 +47,15 @@ namespace ProjetCUBES.Controllers
                 return article;
             }
         }
+        [HttpGet]
+
+        public List<User> displaycustbyname(string name)
+        {
+            using (Apply context = new Apply())
+            {
+                List<User> user = context.Users.Where(x => x.NameUser == name).ToList();
+                return user;
+            }
+        }
     }
 }

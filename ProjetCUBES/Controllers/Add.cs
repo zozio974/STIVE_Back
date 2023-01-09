@@ -18,11 +18,12 @@ namespace ProjetCUBES.Controllers
 
             using (Apply context = new Apply())
             {
-                Customer newcust = new Customer();
-                newcust.LogInCus = login;
-                newcust.PassWordCus = password;
-                newcust.NameCus = name;
-                newcust.FirstNameCus = firstname;
+                User newcust = new User();
+                newcust.LogInUser = login;
+                newcust.PassWordUser = password;
+                newcust.NameUser = name;
+                newcust.FirstNameUser = firstname;
+                newcust.Idjob = 5;
 
 
                 context.Add(newcust);
@@ -62,11 +63,11 @@ namespace ProjetCUBES.Controllers
 
             using (Apply context = new Apply())
             {
-                Employer newemp = new Employer();
-                newemp.LogInEmp = login;
-                newemp.PassWordEmp = password;
-                newemp.NameEmp = name;
-                newemp.FirstNameEmp = firstname;
+                User newemp = new User();
+                newemp.LogInUser = login;
+                newemp.PassWordUser = password;
+                newemp.NameUser = name;
+                newemp.FirstNameUser = firstname;
                 newemp.Idjob = idjob;
 
                 context.Add(newemp);
@@ -105,7 +106,7 @@ namespace ProjetCUBES.Controllers
                 newart.Ladder= ladder;
                 newart.StockProv = 0;
                 newart.StockActual = 0;
-                newart.StockMin = 10;
+                newart.StockMin = 0;
                 context.Add(newart);
                 context.SaveChanges();
             }

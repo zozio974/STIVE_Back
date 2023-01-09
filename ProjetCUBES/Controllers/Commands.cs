@@ -48,7 +48,7 @@ namespace ProjetCUBES.Controllers
         }
 
         [HttpPost]
-        public void addcommand(int refcom)
+        public void addcommand(int refcom,int iduser)
         { 
             using (Apply context = new Apply())
             {
@@ -57,6 +57,7 @@ namespace ProjetCUBES.Controllers
                 command.RefCommand = refcom;
                 command.Status_Comman = 1;
                 command.Date_Command = DateTime.Now.ToString("MM/dd/yyyy");
+                command.Id_User= iduser;
                 List<LineCommand> line = context.LineCommands.Where(x => x.Ref_Command == refcom).ToList();
                 foreach (LineCommand lineCom in line)
                 {
@@ -67,27 +68,7 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
-        [HttpPost]
-        public void addcommandcust(int refcom, int status,int idcust)
-        {
-            using (Apply context = new Apply())
-            {
-                double a = 0;
-                Model.Command command = new Model.Command();
-                command.RefCommand = refcom;
-                command.Status_Comman = status;
-                command.id_customer = idcust;
-                command.Date_Command = DateTime.Now.ToString("MM/dd/yyyy");
-                List<LineCommand> line = context.LineCommands.Where(x => x.Ref_Command == refcom).ToList();
-                foreach (LineCommand lineCom in line)
-                {
-                    a += lineCom.Price;
-                }
-                command.Price_Command = a;
-                context.Add(command);
-                context.SaveChanges();
-            }
-        }
+       
         [HttpGet]
         public List<LineCommand> displaylinecommand(int refcom)
         {

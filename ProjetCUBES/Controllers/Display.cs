@@ -46,43 +46,34 @@ namespace ProjetCUBES.Controllers
 
         [HttpGet]
 
-        public List<Customer> displaycustomers()
+        public List<User> displaycustomers()
         {
             using (Apply context = new Apply())
             {
-                List<Customer> customer = context.Customers.ToList();
+                List<User> customer = context.Users.Where(x=> x.Idjob == 5).ToList();
                 return customer;
             }
         }
         [HttpGet]
-        public Customer displaycustomersbyid(int ID)
+        public User displayusersbyid(int ID)
         {
             using (Apply context = new Apply())
             {
-                Customer cust = context.Customers.Where(x => x.ID_Customer == ID).First();
+                User cust = context.Users.Where(x => x.ID_User == ID).First();
                 return cust;
             }
 
         }
         [HttpGet]
-        public List<Employer> displayemployer()
+        public List<User> displayemployers()
         {
             using (Apply context = new Apply())
             {
-                List<Employer> employer = context.Employers.ToList();
-                return employer;
+                List<User> customer = context.Users.Where(x => x.Idjob != 5).ToList();
+                return customer;
             }
         }
-        [HttpGet]
-        public Employer displayemployersbyid(int ID)
-        {
-            using (Apply context = new Apply())
-            {
-                Employer emp = context.Employers.Where(x => x.ID_Employer == ID).First();
-                return emp;
-            }
-
-        }
+     
         [HttpGet]
         public List<Family> displayfamily()
         {

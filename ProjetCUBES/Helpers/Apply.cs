@@ -10,11 +10,9 @@ namespace ProjetCUBES.Helpers
         public class Apply : DbContext
         {
             public DbSet<Article> Articles { get; set; }
-            public DbSet<Customer> Customers { get; set; }
             public DbSet<Family> Familys { get; set; }
             public DbSet<Supplier> Suppliers { get; set; }
             public DbSet<User> Users { get; set; }
-            public DbSet<Employer> Employers { get; set; }
             public DbSet<Job> Jobs { get; set; }
             public DbSet<Command> Commands { get; set; }
             public DbSet<LineCommand> LineCommands { get; set; }

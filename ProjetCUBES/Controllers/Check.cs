@@ -45,7 +45,7 @@ namespace ProjetCUBES.Controllers
         {
             using (Apply context = new Apply())
             {
-                List<Employer> listemp = context.Employers.Where((x => x.Idjob == a)).ToList();
+                List<User> listemp = context.Users.Where((x => x.Idjob == a)).ToList();
                 if (listemp.Any() == false)
                 {
                     return false;
@@ -75,6 +75,20 @@ namespace ProjetCUBES.Controllers
             {
                Article article = context.Articles.Where(x => x.ID_Article == a).First();
                 if (article.StockProv == 0)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+        [HttpGet]
+
+        public bool custbynameexist(string name)
+        {
+            using (Apply context = new Apply())
+            {
+                List<User> user = context.Users.Where(x => x.NameUser == name).ToList();
+                if (user.Any() == false)
                 {
                     return false;
                 }

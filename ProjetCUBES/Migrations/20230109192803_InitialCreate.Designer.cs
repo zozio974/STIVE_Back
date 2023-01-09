@@ -10,7 +10,7 @@ using ProjetCUBES.Helpers;
 namespace ProjetCUBES.Migrations
 {
     [DbContext(typeof(Class.Apply))]
-    [Migration("20230107103612_InitialCreate")]
+    [Migration("20230109192803_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,6 +83,9 @@ namespace ProjetCUBES.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("Id_User")
+                        .HasColumnType("int");
+
                     b.Property<double>("Price_Command")
                         .HasColumnType("double");
 
@@ -92,69 +95,9 @@ namespace ProjetCUBES.Migrations
                     b.Property<int>("Status_Comman")
                         .HasColumnType("int");
 
-                    b.Property<int>("id_customer")
-                        .HasColumnType("int");
-
                     b.HasKey("Id_Command");
 
                     b.ToTable("Commands");
-                });
-
-            modelBuilder.Entity("ProjetCUBES.Model.Customer", b =>
-                {
-                    b.Property<int>("ID_Customer")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstNameCus")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("LogInCus")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NameCus")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PassWordCus")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("ID_Customer");
-
-                    b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("ProjetCUBES.Model.Employer", b =>
-                {
-                    b.Property<int>("ID_Employer")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstNameEmp")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Idjob")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LogInEmp")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NameEmp")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("PassWordEmp")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("ID_Employer");
-
-                    b.ToTable("Employers");
                 });
 
             modelBuilder.Entity("ProjetCUBES.Model.Family", b =>
@@ -238,6 +181,36 @@ namespace ProjetCUBES.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Suppliers");
+                });
+
+            modelBuilder.Entity("ProjetCUBES.Model.User", b =>
+                {
+                    b.Property<int>("ID_User")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirstNameUser")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Idjob")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LogInUser")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("NameUser")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("PassWordUser")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("ID_User");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

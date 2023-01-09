@@ -13,6 +13,7 @@ namespace ProjetCUBES.Helpers
             public DbSet<Customer> Customers { get; set; }
             public DbSet<Family> Familys { get; set; }
             public DbSet<Supplier> Suppliers { get; set; }
+            public DbSet<User> Users { get; set; }
             public DbSet<Employer> Employers { get; set; }
             public DbSet<Job> Jobs { get; set; }
             public DbSet<Command> Commands { get; set; }

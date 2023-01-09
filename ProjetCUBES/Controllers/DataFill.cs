@@ -26,11 +26,10 @@ namespace ProjetCUBES.Controllers
         [HttpPost]
 
         public void FillBDD() 
-        { 
-            FillCustomer();
+        {
+            FillUser();
             FillFamily();
             FillJob();
-            FillEmployer();
             FillSupplier();
             FillArticle();
             
@@ -59,31 +58,31 @@ namespace ProjetCUBES.Controllers
 
             }
         }
-        public static void FillEmployer()
+        public static void FillUser()
         {
             using (Apply context = new Apply())
             {
-                Employer employer = new Employer("admin", "admin12", "patron", "patron", 1);
-                Employer employer1 = new Employer("gestion", "gestion", "gestion", "gestion", 2);
-                Employer employer2 = new Employer("inventaire", "inventaire", "inventaire", "inventaire", 3);
-                Employer employer3 = new Employer("commande", "commande", "commande", "commande", 4);
+                User employer = new User("admin", "admin12", "patron", "patron", 1);
+                User employer1 = new User("gestion", "gestion", "gestion", "gestion", 2);
+                User employer2 = new User("inventaire", "inventaire", "inventaire", "inventaire", 3);
+                User employer3 = new User("commande", "commande", "commande", "commande", 4);
                 context.Add(employer);
                 context.Add(employer1);
                 context.Add(employer2);
                 context.Add(employer3);
                 context.SaveChanges();
-                List<Employer> list = new List<Employer>();
+                List<User> list = new List<User>();
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 100; i++)
                 {
                     string a = Faker.Name.First();
-                    Employer use = new Employer(Faker.Internet.Email(a), GetRandomPassword(8), Faker.Name.Last(), a, Faker.RandomNumber.Next(2, 4));
+                    User use = new User(Faker.Internet.Email(a), GetRandomPassword(8), Faker.Name.Last(), a, 5);
 
                     list.Add(use);
                 }
 
 
-                foreach (Employer emp in list)
+                foreach (User emp in list)
                 {
                     context.Add(emp);
                     context.SaveChanges();
@@ -98,11 +97,13 @@ namespace ProjetCUBES.Controllers
             using (Apply context = new Apply())
             {
                 List<Job> list = new List<Job>();
-                list.Add(new Job("Gérant"));
+                list.Add(new Job("Admin"));
                 list.Add(new Job("Gestionnaire"));
                 list.Add(new Job("Inventoriste"));
                 list.Add(new Job("Passeur de commande"));
-                foreach(Job job in list)
+                list.Add(new Job("Client"));
+
+                foreach (Job job in list)
                 {
                     context.Add(job);
                     context.SaveChanges();
@@ -328,5 +329,6 @@ namespace ProjetCUBES.Controllers
                 }
             }
         }
+
     }
 }

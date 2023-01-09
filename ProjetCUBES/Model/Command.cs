@@ -25,21 +25,15 @@ namespace ProjetCUBES.Model
 
         public Command() { }
 
-        public Command(int refcommand, string date_Command, double price_Command, int status_Command)
-        {
-            RefCommand= refcommand;
-            Date_Command = date_Command;
-            Price_Command = price_Command;
-            Status_Comman = status_Command;
-        }
+        
 
-        public Command(int refcommand, string date_Command, double price_Command, int status_Command,int idcustomer)
+        public Command(int refcommand, string date_Command, double price_Command, int status_Command,int iduser)
         {
             RefCommand = refcommand;
             Date_Command = date_Command;
             Price_Command = price_Command;
             Status_Comman = status_Command;
-            id_customer = idcustomer;
+            id_customer = iduser;
         }
     }
 }

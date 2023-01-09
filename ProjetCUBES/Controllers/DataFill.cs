@@ -35,29 +35,7 @@ namespace ProjetCUBES.Controllers
             
             FillStatusCommand();
         }
-        public static void FillCustomer()
-        {
-            using (Apply context = new Apply())
-            {
-                List<Customer> list = new List<Customer>();
-
-                for (int i = 0; i < 100; i++)
-                {
-                    string a = Faker.Name.First();
-                    Customer use = new Customer(Faker.Internet.Email(a), GetRandomPassword(8), Faker.Name.Last(), a);
-
-                    list.Add(use);
-                }
-
-
-                foreach (Customer cust in list)
-                {
-                    context.Add(cust);
-                    context.SaveChanges();
-                }
-
-            }
-        }
+       
         public static void FillUser()
         {
             using (Apply context = new Apply())
@@ -271,7 +249,7 @@ namespace ProjetCUBES.Controllers
                     int b = Faker.RandomNumber.Next(0, grapelist.Length-1);
                     int c = Faker.RandomNumber.Next(0, ladderlist.Length - 1);
                     double d = Faker.RandomNumber.Next(7, 40);
-                    Article use = new Article(winelist[a],Faker.RandomNumber.Next(1,5), Faker.RandomNumber.Next(2015,2022), Faker.RandomNumber.Next(1, 5), d,d+5,75,Faker.RandomNumber.Next(12, 15), grapelist[b], ladderlist[c],0,0,10);
+                    Article use = new Article(winelist[a],Faker.RandomNumber.Next(1,5), Faker.RandomNumber.Next(2015,2022), Faker.RandomNumber.Next(1, 5), d,d+5,75,Faker.RandomNumber.Next(12, 15), grapelist[b], ladderlist[c],0,0,0);
 
                     list.Add(use);
                 }
@@ -283,6 +261,7 @@ namespace ProjetCUBES.Controllers
                         int a = Faker.RandomNumber.Next(15, 100);
                         art.StockActual= a;
                         art.StockProv = a;
+                        art.StockMin = 10;
                     }
                     context.Add(art);
                     context.SaveChanges();

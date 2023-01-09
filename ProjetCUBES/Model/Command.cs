@@ -21,7 +21,7 @@ namespace ProjetCUBES.Model
         [Required]
         public int Status_Comman { get; set; }
 
-        public int id_customer { get; set; }
+        public int Id_User { get; set; }
 
         public Command() { }
 
@@ -33,7 +33,7 @@ namespace ProjetCUBES.Model
             Date_Command = date_Command;
             Price_Command = price_Command;
             Status_Comman = status_Command;
-            id_customer = iduser;
+            Id_User = iduser;
         }
     }
 }

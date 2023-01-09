@@ -21,32 +21,32 @@ namespace ProjetCUBES.Controllers
             {
                 if (login != "")
                 {
-                    Customer cust = context.Customers.Where(x => x.ID_Customer == ID).First();
-                    cust.LogInCus = login;
+                    User cust = context.Users.Where(x => x.ID_User == ID).First();
+                    cust.LogInUser = login;
                     context.Update(cust);
                     context.SaveChanges();
 
                 }
                 if (password != "")
                 {
-                    Customer cust = context.Customers.Where(x => x.ID_Customer == ID).First();
-                    cust.PassWordCus = password;
+                    User cust = context.Users.Where(x => x.ID_User == ID).First();
+                    cust.PassWordUser = password;
                     context.Update(cust);
                     context.SaveChanges();
 
                 }
                 if (name != "")
                 {
-                    Customer cust = context.Customers.Where(x => x.ID_Customer == ID).First();
-                    cust.NameCus = name;
+                    User cust = context.Users.Where(x => x.ID_User == ID).First();
+                    cust.NameUser = name;
                     context.Update(cust);
                     context.SaveChanges();
 
                 }
                 if (firstname != "")
                 {
-                    Customer cust = context.Customers.Where(x => x.ID_Customer == ID).First();
-                    cust.FirstNameCus = firstname;
+                    User cust = context.Users.Where(x => x.ID_User == ID).First();
+                    cust.FirstNameUser = firstname;
                     context.Update(cust);
                     context.SaveChanges();
 
@@ -63,15 +63,15 @@ namespace ProjetCUBES.Controllers
             {
                 if (login != "")
                 {
-                    Employer emp = context.Employers.Where(x => x.ID_Employer == ID).First();
-                    emp.LogInEmp = login;
+                    User emp = context.Users.Where(x => x.ID_User == ID).First();
+                    emp.LogInUser = login;
                     context.Update(emp);
                     context.SaveChanges();
 
                 }
                 if (idjob != "")
                 {
-                    Employer emp = context.Employers.Where(x => x.ID_Employer == ID).First();
+                    User emp = context.Users.Where(x => x.ID_User == ID).First();
                     emp.Idjob = Convert.ToInt32(idjob);
                     context.Update(emp);
                     context.SaveChanges();
@@ -79,24 +79,24 @@ namespace ProjetCUBES.Controllers
                 }
                 if (password != "")
                 {
-                    Employer emp = context.Employers.Where(x => x.ID_Employer == ID).First();
-                    emp.PassWordEmp = password;
+                    User emp = context.Users.Where(x => x.ID_User == ID).First();
+                    emp.PassWordUser = password;
                     context.Update(emp);
                     context.SaveChanges();
 
                 }
                 if (name != "")
                 {
-                    Employer emp = context.Employers.Where(x => x.ID_Employer == ID).First();
-                    emp.NameEmp = name;
+                    User emp = context.Users.Where(x => x.ID_User == ID).First();
+                    emp.NameUser = name;
                     context.Update(emp);
                     context.SaveChanges();
 
                 }
                 if (firstname != "")
                 {
-                    Employer emp = context.Employers.Where(x => x.ID_Employer == ID).First();
-                    emp.FirstNameEmp = firstname;
+                    User emp = context.Users.Where(x => x.ID_User == ID).First();
+                    emp.FirstNameUser = firstname;
                     context.Update(emp);
                     context.SaveChanges();
                 }

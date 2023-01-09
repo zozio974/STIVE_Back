@@ -18,13 +18,13 @@ namespace ProjetCUBES.Controllers
         {
             using (Apply context = new Apply())
             {
-                List<Customer> listcust = context.Customers.Where((x => x.LogInCus == username)).ToList();
+                List<User> listcust = context.Users.Where((x => x.LogInUser == username && x.Idjob ==5)).ToList();
                 if (listcust.Any() == false)
                 {
                     return false;
                 }
-                Customer cust = context.Customers.Where((x => x.LogInCus == username)).First();
-                if (cust.PassWordCus != password)
+                User cust = context.Users.Where((x => x.LogInUser == username)).First();
+                if (cust.PassWordUser != password)
                 {
                     return false;
                 }
@@ -36,13 +36,13 @@ namespace ProjetCUBES.Controllers
         {
             using (Apply context = new Apply())
             {
-                List<Employer> listemp = context.Employers.Where((x => x.LogInEmp == username)).ToList();
-                if (listemp.Any() == false)
+                List<User> listcust = context.Users.Where((x => x.LogInUser == username && x.Idjob != 5)).ToList();
+                if (listcust.Any() == false)
                 {
                     return false;
                 }
-                Employer emp = context.Employers.Where((x => x.LogInEmp == username)).First();
-                if (emp.PassWordEmp != password)
+                User cust = context.Users.Where((x => x.LogInUser == username)).First();
+                if (cust.PassWordUser != password)
                 {
                     return false;
                 }
@@ -50,11 +50,11 @@ namespace ProjetCUBES.Controllers
             }
         }
         [HttpGet]
-        public Employer getjobbylogin(string name)
+        public User getjobbylogin(string name)
         {
             using (Apply context = new Apply())
             {
-                Employer emp = context.Employers.Where(x => x.LogInEmp == name).First();
+                User emp = context.Users.Where(x => x.LogInUser == name).First();
                 return emp;
             }
         }

@@ -17,6 +17,8 @@ namespace ProjetCUBES.Helpers
             public DbSet<Command> Commands { get; set; }
             public DbSet<LineCommand> LineCommands { get; set; }
             public DbSet<StatusCommand> StatusCommands { get; set; }
+            public DbSet<Auto> Autos { get; set; }
+
 
 
 

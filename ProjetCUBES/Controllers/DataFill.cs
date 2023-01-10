@@ -32,18 +32,21 @@ namespace ProjetCUBES.Controllers
             FillJob();
             FillSupplier();
             FillArticle();
-            
+            FillAuto();
             FillStatusCommand();
+            FillCommands();
         }
        
         public static void FillUser()
         {
             using (Apply context = new Apply())
             {
+                User auto= new User("adminauto","dnoanad9745","automatique","auto",1);
                 User employer = new User("admin", "admin12", "patron", "patron", 1);
                 User employer1 = new User("gestion", "gestion", "gestion", "gestion", 2);
                 User employer2 = new User("inventaire", "inventaire", "inventaire", "inventaire", 3);
                 User employer3 = new User("commande", "commande", "commande", "commande", 4);
+                context.Add(auto);
                 context.Add(employer);
                 context.Add(employer1);
                 context.Add(employer2);
@@ -297,13 +300,50 @@ namespace ProjetCUBES.Controllers
                 List<StatusCommand> list = new List<StatusCommand>();
 
                 list.Add(new StatusCommand("En cours"));
-                list.Add(new StatusCommand("Validé"));
+                list.Add(new StatusCommand("Archivé"));
                 
                 
 
                 foreach (StatusCommand stat in list)
                 {
                     context.Add(stat);
+                    context.SaveChanges();
+                }
+            }
+        }
+        public static void FillCommands()
+        {
+            using (Apply context = new Apply())
+            {
+                List<Command> list = new List<Command>();
+                for (int i=0; i < 20; i++)
+                {
+                    list.Add(new Command(GetRandomPassword(5), DateTime.Now.ToString("MM/dd/yyyy"), Faker.RandomNumber.Next(20, 450),2,1));
+
+                }
+
+
+
+                foreach (Command stat in list)
+                {
+                    context.Add(stat);
+                    context.SaveChanges();
+                }
+            }
+        }
+        public static void FillAuto()
+        {
+            using (Apply context = new Apply())
+            {
+                List<Auto> list = new List<Auto>();
+
+                list.Add(new Auto(50,1));
+
+                
+
+                foreach (Auto aut in list)
+                {
+                    context.Add(aut);
                     context.SaveChanges();
                 }
             }

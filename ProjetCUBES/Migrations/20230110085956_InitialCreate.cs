@@ -42,12 +42,28 @@ namespace ProjetCUBES.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Autos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    AddToStock = table.Column<int>(type: "int", nullable: false),
+                    AutoRefill = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Autos", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Commands",
                 columns: table => new
                 {
                     Id_Command = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    RefCommand = table.Column<int>(type: "int", nullable: false),
+                    RefCommand = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Date_Command = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Price_Command = table.Column<double>(type: "double", nullable: false),
@@ -97,7 +113,8 @@ namespace ProjetCUBES.Migrations
                     Id_LineCommande = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Id_article = table.Column<int>(type: "int", nullable: false),
-                    Ref_Command = table.Column<int>(type: "int", nullable: false),
+                    Ref_Command = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "double", nullable: false)
                 },
@@ -164,6 +181,9 @@ namespace ProjetCUBES.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Articles");
+
+            migrationBuilder.DropTable(
+                name: "Autos");
 
             migrationBuilder.DropTable(
                 name: "Commands");

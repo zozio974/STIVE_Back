@@ -16,14 +16,14 @@ namespace ProjetCUBES.Model
         [Required]
         public int Id_article { get; set; }
         [Required]
-        public int Ref_Command { get; set; }
+        public string Ref_Command { get; set; }
         [Required]
         public int Quantity { get; set; }
         [Required]
         public double Price { get; set; }
         public LineCommand() { }
 
-        public LineCommand(int id_article,int ref_comand, int quantity, double price)
+        public LineCommand(int id_article,string ref_comand, int quantity, double price)
         {
             Id_article = id_article;
             Ref_Command = ref_comand;

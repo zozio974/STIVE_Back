@@ -239,9 +239,51 @@ namespace ProjetCUBES.Controllers
                 return list1;
             }
         }
-        
-        
-        
+        [HttpGet]
+        public string getnameuser(int ID)
+        {
+            using (Apply context = new Apply())
+            {
+                User user = context.Users.Where(x => x.ID_User == ID).First();
+                return user.NameUser.ToString();
+            }
+        }
+        [HttpGet]
+        public List<string> getlistnameuser([FromQuery] int[] listOfIds)
+        {
+            using (Apply context = new Apply())
+            {
+                List<string> list1 = new List<string>();
+                foreach (int s in listOfIds)
+                {
+                    list1.Add(getnameuser(s).ToString());
+                }
+                return list1;
+            }
+        }
+        [HttpGet]
+        public string getnamestatus(int ID)
+        {
+            using (Apply context = new Apply())
+            {
+                StatusCommand stat = context.StatusCommands.Where(x => x.Id_StatusCommand == ID).First();
+                return stat.Name.ToString();
+            }
+        }
+        [HttpGet]
+        public List<string> getlistnamestatus([FromQuery] int[] listOfIds)
+        {
+            using (Apply context = new Apply())
+            {
+                List<string> list1 = new List<string>();
+                foreach (int s in listOfIds)
+                {
+                    list1.Add(getnamestatus(s).ToString());
+                }
+                return list1;
+            }
+        }
+
 
 
 

@@ -95,5 +95,20 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+
+        [HttpGet]
+
+        public bool checkstatuscommand(int id)
+        {
+            using (Apply context = new Apply())
+            {
+                Command comm = context.Commands.Where(x => x.Id_Command == id).First();
+                if (comm.Status_Comman == 2)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
     }
 }

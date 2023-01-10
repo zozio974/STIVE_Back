@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjetCUBES.Model;
 using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Security.Cryptography;
 using WebApi.OutputCache.Core.Time;
 using static ProjetCUBES.Helpers.Class;
@@ -14,7 +16,7 @@ namespace ProjetCUBES.Controllers
     public class Commands
     {
         [HttpPost]
-        public void addlinecommand(int idart,int refcom,int quant)
+        public void addlinecommand(int idart,string refcom,int quant)
         {
             using (Apply context = new Apply())
             {
@@ -29,7 +31,7 @@ namespace ProjetCUBES.Controllers
             }
         }
         [HttpPost]
-        public void addlinecommandsup(int idart, int refcom, int quant)
+        public void addlinecommandsup(int idart, string refcom, int quant)
         {
             using (Apply context = new Apply())
             {
@@ -44,11 +46,13 @@ namespace ProjetCUBES.Controllers
 
                 Article stock = context.Articles.Where(x => x.ID_Article == idart).First();
                 stock.StockProv += quant;
+                context.Update(stock);
+                context.SaveChanges();
             }
         }
 
         [HttpPost]
-        public void addcommand(int refcom,int iduser)
+        public void addcommand(string refcom,int iduser)
         { 
             using (Apply context = new Apply())
             {
@@ -70,7 +74,7 @@ namespace ProjetCUBES.Controllers
         }
        
         [HttpGet]
-        public List<LineCommand> displaylinecommand(int refcom)
+        public List<LineCommand> displaylinecommand(string refcom)
         {
             using (Apply context = new Apply())
             {
@@ -78,7 +82,110 @@ namespace ProjetCUBES.Controllers
                 return line;
             }
         }
-        
-        
+        [HttpPut]
+        public void dropstockmulid(int idstock, int i)
+        {
+            using (Apply context = new Apply())
+            {
+                Article stock = context.Articles.Where(x => x.ID_Article == idstock).First();
+                stock.StockActual -= i;
+                stock.StockProv -= i;
+                context.Update(stock);
+                context.SaveChanges();
+            }
+            using (Apply context = new Apply())
+            {
+                Article stock = context.Articles.Where(x => x.ID_Article == idstock).First();
+                Auto auto = context.Autos.Where(x => x.Id == 1).First();
+                User user = context.Users.Where(x => x.ID_User == 1).First();
+                if (stock.StockProv < stock.StockMin && auto.AutoRefill == 1)
+                {
+                    string a = DataFill.GetRandomPassword(5);
+                    addlinecommandsup(idstock, a, auto.AddToStock);
+                    addcommand(a, user.ID_User);
+                }
+            }
+        }
+        [HttpPut]
+        public void dropstockunitid(int idstock)
+        {
+            using (Apply context = new Apply())
+            {
+                Article stock = context.Articles.Where(x => x.ID_Article == idstock).First();
+                stock.StockActual--;
+                stock.StockProv--;
+                context.Update(stock);
+                context.SaveChanges();
+            }
+            using (Apply context = new Apply())
+            {
+                Article stock = context.Articles.Where(x => x.ID_Article == idstock).First();
+                Auto auto = context.Autos.Where(x => x.Id == 1).First();
+                User user = context.Users.Where(x => x.ID_User == 1).First();
+                if (stock.StockProv < stock.StockMin && auto.AutoRefill == 1)
+                {
+                    string a = DataFill.GetRandomPassword(5);
+                    addlinecommandsup(idstock, a, auto.AddToStock);
+                    addcommand(a, user.ID_User);
+                }
+            }
+        }
+        [HttpPut]
+        public void putstock(int idstock, int i)
+        {
+            using (Apply context = new Apply())
+            {
+                Article stock = context.Articles.Where(x => x.ID_Article == idstock).First();
+                stock.StockProv = i;
+                stock.StockActual = i;
+                context.Update(stock);
+                context.SaveChanges();
+            }
+            using (Apply context = new Apply())
+            {
+                Article stock = context.Articles.Where(x => x.ID_Article == idstock).First();
+                Auto auto = context.Autos.Where(x => x.Id == 1).First();
+                User user = context.Users.Where(x => x.ID_User == 1).First();
+                if (stock.StockProv < stock.StockMin && auto.AutoRefill == 1)
+                {
+                    string a = DataFill.GetRandomPassword(5);
+                    addlinecommandsup(idstock, a, auto.AddToStock);
+                    addcommand(a, user.ID_User);
+                }
+            }
+        }
+        [HttpGet]
+        public List<Command> displaycommands()
+        {
+            using (Apply context = new Apply())
+            {
+                List<Command> commande = context.Commands.ToList();
+                List<Command> reverse = Enumerable.Reverse(commande).ToList();
+
+                return reverse;
+            }
+        }
+        [HttpPost]
+        public void validatecommand(int id)
+        {
+            using (Apply context = new Apply())
+            {
+                Command comm = context.Commands.Where(x => x.Id_Command== id).First();
+                List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == comm.RefCommand).ToList();
+                foreach (LineCommand line in linecom)
+                {
+                    Article article = context.Articles.Where(x => x.ID_Article == line.Id_article).First();
+                    article.StockActual = article.StockProv;
+                    context.Update(article);
+                    context.SaveChanges();
+                }
+                comm.Status_Comman = 2;
+                context.Update(comm);
+                context.SaveChanges();
+
+            }
+
+        }
+
     }
 }

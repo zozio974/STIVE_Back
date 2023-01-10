@@ -71,6 +71,23 @@ namespace ProjetCUBES.Migrations
                     b.ToTable("Articles");
                 });
 
+            modelBuilder.Entity("ProjetCUBES.Model.Auto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("AddToStock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AutoRefill")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Autos");
+                });
+
             modelBuilder.Entity("ProjetCUBES.Model.Command", b =>
                 {
                     b.Property<int>("Id_Command")
@@ -87,8 +104,9 @@ namespace ProjetCUBES.Migrations
                     b.Property<double>("Price_Command")
                         .HasColumnType("double");
 
-                    b.Property<int>("RefCommand")
-                        .HasColumnType("int");
+                    b.Property<string>("RefCommand")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("Status_Comman")
                         .HasColumnType("int");
@@ -143,8 +161,9 @@ namespace ProjetCUBES.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("Ref_Command")
-                        .HasColumnType("int");
+                    b.Property<string>("Ref_Command")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id_LineCommande");
 

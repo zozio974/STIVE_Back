@@ -13,21 +13,21 @@ namespace ProjetCUBES.Model
         [Key]
         public int Id_Command { get; set; }
         [Required]
-        public int RefCommand { get; set; }
+        public string RefCommand { get; set; }
         [Required]
         public string Date_Command { get; set; }
         [Required]
         public double Price_Command { get; set; }
         [Required]
         public int Status_Comman { get; set; }
-
+        [Required]
         public int Id_User { get; set; }
 
         public Command() { }
 
         
 
-        public Command(int refcommand, string date_Command, double price_Command, int status_Command,int iduser)
+        public Command(string refcommand, string date_Command, double price_Command, int status_Command,int iduser)
         {
             RefCommand = refcommand;
             Date_Command = date_Command;

@@ -100,7 +100,7 @@ namespace ProjetCUBES.Controllers
                 User user = context.Users.Where(x => x.ID_User == 1).First();
                 if (stock.StockProv < stock.StockMin && auto.AutoRefill == 1)
                 {
-                    string a = DataFill.GetRandomPassword(5);
+                    string a = DataFill.RandomString(5);
                     addlinecommandsup(idstock, a, auto.AddToStock);
                     addcommand(a, user.ID_User);
                 }
@@ -124,7 +124,7 @@ namespace ProjetCUBES.Controllers
                 User user = context.Users.Where(x => x.ID_User == 1).First();
                 if (stock.StockProv < stock.StockMin && auto.AutoRefill == 1)
                 {
-                    string a = DataFill.GetRandomPassword(5);
+                    string a = DataFill.RandomString(5);
                     addlinecommandsup(idstock, a, auto.AddToStock);
                     addcommand(a, user.ID_User);
                 }

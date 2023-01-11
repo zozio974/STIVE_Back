@@ -22,6 +22,19 @@ namespace ProjetCUBES.Controllers
             rngCrypt.GetBytes(rgb);
             return Convert.ToBase64String(rgb);
         }
+        public static string RandomString(int length)
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[length];
+            var random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            return new String(stringChars);
+        }
 
         [HttpPost]
 
@@ -316,15 +329,25 @@ namespace ProjetCUBES.Controllers
             using (Apply context = new Apply())
             {
                 List<Command> list = new List<Command>();
+                List<LineCommand> list2 = new List<LineCommand>();
+
+
                 for (int i=0; i < 20; i++)
                 {
-                    list.Add(new Command(GetRandomPassword(5), DateTime.Now.ToString("MM/dd/yyyy"), Faker.RandomNumber.Next(20, 450),2,1));
-
+                    string b = RandomString(5);
+                    int c = Faker.RandomNumber.Next(1, 50);
+                    list.Add(new Command(b, DateTime.Now.ToString("MM/dd/yyyy"), Faker.RandomNumber.Next(20, 450),2,1));
+                    list2.Add(new LineCommand(Faker.RandomNumber.Next(1, 199), b, c, c * Faker.RandomNumber.Next(7, 20)));
                 }
 
 
 
                 foreach (Command stat in list)
+                {
+                    context.Add(stat);
+                    context.SaveChanges();
+                }
+                foreach (LineCommand stat in list2)
                 {
                     context.Add(stat);
                     context.SaveChanges();

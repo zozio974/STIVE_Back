@@ -283,8 +283,29 @@ namespace ProjetCUBES.Controllers
                 return list1;
             }
         }
+        [HttpGet]
+        public string getnamearticle(int ID)
+        {
+            using (Apply context = new Apply())
+            {
+                Article art = context.Articles.Where(x => x.ID_Article == ID).First();
+                return art.NameArticle.ToString();
+            }
+        }
 
-
+        [HttpGet]
+        public List<string> getlistnamearticle([FromQuery] int[] listOfIds)
+        {
+            using (Apply context = new Apply())
+            {
+                List<string> list1 = new List<string>();
+                foreach (int s in listOfIds)
+                {
+                    list1.Add(getnamearticle(s).ToString());
+                }
+                return list1;
+            }
+        }
 
 
     }

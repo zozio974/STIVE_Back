@@ -24,7 +24,7 @@ namespace ProjetCUBES.Controllers
         }
         public static string RandomString(int length)
         {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var chars = "123456789";
             var stringChars = new char[length];
             var random = new Random();
 
@@ -331,15 +331,23 @@ namespace ProjetCUBES.Controllers
                 List<Command> list = new List<Command>();
                 List<LineCommand> list2 = new List<LineCommand>();
 
-
+                int rand = Convert.ToInt32(RandomString(3));
                 for (int i=0; i < 20; i++)
                 {
-                    string b = RandomString(5);
+                    
+                    string b = $"F{rand + i}";
                     int c = Faker.RandomNumber.Next(1, 50);
                     list.Add(new Command(b, DateTime.Now.ToString("MM/dd/yyyy"), Faker.RandomNumber.Next(20, 450),2,1));
                     list2.Add(new LineCommand(Faker.RandomNumber.Next(1, 199), b, c, c * Faker.RandomNumber.Next(7, 20)));
                 }
+                for (int i = 0; i < 20; i++)
+                {
+                    string b = $"C{rand + i}";
 
+                    int c = Faker.RandomNumber.Next(1, 50);
+                    list.Add(new Command(b, DateTime.Now.ToString("MM/dd/yyyy"), Faker.RandomNumber.Next(20, 450), 2, Faker.RandomNumber.Next(10, 100)));
+                    list2.Add(new LineCommand(Faker.RandomNumber.Next(1, 199), b, c, c * Faker.RandomNumber.Next(7, 20)));
+                }
 
 
                 foreach (Command stat in list)
@@ -361,9 +369,7 @@ namespace ProjetCUBES.Controllers
                 List<Auto> list = new List<Auto>();
 
                 list.Add(new Auto(50,1));
-
-                
-
+               
                 foreach (Auto aut in list)
                 {
                     context.Add(aut);

@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using Bogus.DataSets;
 using Faker;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -44,10 +45,7 @@ namespace ProjetCUBES.Controllers
                 context.Add(lineCommandCust);
                 context.SaveChanges();
 
-                Article stock = context.Articles.Where(x => x.ID_Article == idart).First();
-                stock.StockProv += quant;
-                context.Update(stock);
-                context.SaveChanges();
+               
             }
         }
 
@@ -57,15 +55,22 @@ namespace ProjetCUBES.Controllers
             using (Apply context = new Apply())
             {
                 double a = 0;
+                double b = 0;
                 Model.Command command = new Model.Command();
                 command.RefCommand = refcom;
                 command.Status_Comman = 1;
                 command.Date_Command = DateTime.Now.ToString("MM/dd/yyyy");
                 command.Id_User= iduser;
                 List<LineCommand> line = context.LineCommands.Where(x => x.Ref_Command == refcom).ToList();
+                
+                
                 foreach (LineCommand lineCom in line)
                 {
+                    Article stock = context.Articles.Where(x => x.ID_Article == lineCom.Id_article).First();
+                    stock.StockProv += lineCom.Quantity;
                     a += lineCom.Price;
+                    context.Update(stock);
+                    context.SaveChanges();
                 }
                 command.Price_Command= a;
                 context.Add(command);
@@ -185,6 +190,45 @@ namespace ProjetCUBES.Controllers
 
             }
 
+        }
+        [HttpGet]
+
+        public List<Command> displaycommandsup()
+        {
+            using (Apply context = new Apply())
+            {
+                var comres = new List<Command>();
+                List<Command> comm = context.Commands.ToList();
+                foreach(Command com in comm)
+                {
+                    User user = context.Users.Where(x => x.ID_User == com.Id_User).First();
+                    if(user.Idjob != 5)
+                    {
+                        comres.Add(com);
+                    }
+                }
+                List<Command> reverse = Enumerable.Reverse(comres).ToList();
+                return reverse;
+            }
+        }
+        [HttpGet]
+        public List<Command> displaycommandclient()
+        {
+            using (Apply context = new Apply())
+            {
+                var comres = new List<Command>();
+                List<Command> comm = context.Commands.ToList();
+                foreach (Command com in comm)
+                {
+                    User user = context.Users.Where(x => x.ID_User == com.Id_User).First();
+                    if (user.Idjob == 5)
+                    {
+                        comres.Add(com);
+                    }
+                }
+                List<Command> reverse = Enumerable.Reverse(comres).ToList();
+                return reverse;
+            }
         }
 
     }

@@ -110,5 +110,19 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+        [HttpGet]
+
+        public bool checkrefcommand(string refcom)
+        {
+            using (Apply context = new Apply())
+            {
+                List<Command> comm = context.Commands.Where(x => x.RefCommand == refcom).ToList();
+                if (comm.Any() == false)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
     }
 }

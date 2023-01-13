@@ -18,7 +18,7 @@ namespace ProjetCUBES.Controllers
         {
             using (Apply context = new Apply())
             {
-                Auto auto = context.Autos.Where(x => x.ID_Auto == 1).First();
+                Auto auto = context.Autos.Where(x => x.Id == 1).First();
                 auto.AutoRefill=0;
                 context.Update(auto);
                 context.SaveChanges();
@@ -30,7 +30,7 @@ namespace ProjetCUBES.Controllers
         {
             using (Apply context = new Apply())
             {
-                Auto auto = context.Autos.Where(x => x.ID_Auto == 1).First();
+                Auto auto = context.Autos.Where(x => x.Id == 1).First();
                 auto.AutoRefill = 1;
                 context.Update(auto);
                 context.SaveChanges();
@@ -42,7 +42,7 @@ namespace ProjetCUBES.Controllers
         {
             using (Apply context = new Apply())
             {
-                Auto auto = context.Autos.Where(x => x.ID_Auto == 1).First();
+                Auto auto = context.Autos.Where(x => x.Id == 1).First();
                 auto.AddToStock = y;
                 context.Update(auto);
                 context.SaveChanges();

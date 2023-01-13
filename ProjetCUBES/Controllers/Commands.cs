@@ -77,7 +77,37 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
-       
+
+        [HttpPost]
+        public void addcommandclient(string refcom, int iduser)
+        {
+            using (Apply context = new Apply())
+            {
+                double a = 0;
+                double b = 0;
+                Model.Command command = new Model.Command();
+                command.RefCommand = refcom;
+                command.Status_Comman = 1;
+                command.Date_Command = DateTime.Now.ToString("MM/dd/yyyy");
+                command.Id_User = iduser;
+                List<LineCommand> line = context.LineCommands.Where(x => x.Ref_Command == refcom).ToList();
+
+
+                foreach (LineCommand lineCom in line)
+                {
+                    Article stock = context.Articles.Where(x => x.ID_Article == lineCom.Id_article).First();
+                    stock.StockProv -= lineCom.Quantity;
+                    stock.StockActual -= lineCom.Quantity;
+                    a += lineCom.Price;
+                    context.Update(stock);
+                    context.SaveChanges();
+                }
+                command.Price_Command = a;
+                context.Add(command);
+                context.SaveChanges();
+            }
+        }
+
         [HttpGet]
         public List<LineCommand> displaylinecommand(string refcom)
         {
@@ -187,6 +217,50 @@ namespace ProjetCUBES.Controllers
                 comm.Status_Comman = 2;
                 context.Update(comm);
                 context.SaveChanges();
+
+            }
+
+        }
+        [HttpPost]
+        public void validatecommandclient(int id)
+        {
+            using (Apply context = new Apply())
+            {
+                Command comm = context.Commands.Where(x => x.Id_Command == id).First();
+                List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == comm.RefCommand).ToList();
+                foreach (LineCommand line in linecom)
+                {
+                    Article article = context.Articles.Where(x => x.ID_Article == line.Id_article).First();
+                    article.StockActual -= line.Quantity;
+                    article.StockProv -= line.Quantity;
+                    context.Update(article);
+                    context.SaveChanges();
+                }
+                comm.Status_Comman = 2;
+                context.Update(comm);
+                context.SaveChanges();
+
+            }
+
+        }
+        [HttpGet]
+        public bool checkvalidatecommandclient(int id)
+        {
+            using (Apply context = new Apply())
+            {
+                Command comm = context.Commands.Where(x => x.Id_Command == id).First();
+                List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == comm.RefCommand).ToList();
+                foreach (LineCommand line in linecom)
+                {
+                    Article article = context.Articles.Where(x => x.ID_Article == line.Id_article).First();
+                    article.StockActual -= line.Quantity;
+                    article.StockProv -= line.Quantity;
+                    if (article.StockActual < 0)
+                    {
+                        return false;
+                    }
+                }
+                return true;
 
             }
 

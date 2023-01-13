@@ -259,26 +259,21 @@ namespace ProjetCUBES.Controllers
             {
                 
                 List<Article> list = new List<Article>();
-                for (int i = 0; i < 200; i++)
+                for (int i = 0; i < 150; i++)
                 {
                     int a = Faker.RandomNumber.Next(0,winelist.Length-1);
                     int b = Faker.RandomNumber.Next(0, grapelist.Length-1);
                     int c = Faker.RandomNumber.Next(0, ladderlist.Length - 1);
                     double d = Faker.RandomNumber.Next(7, 40);
-                    Article use = new Article(winelist[a],Faker.RandomNumber.Next(1,5), Faker.RandomNumber.Next(2015,2022), Faker.RandomNumber.Next(1, 5), d,d+5,75,Faker.RandomNumber.Next(12, 15), grapelist[b], ladderlist[c],0,0,0);
+                    int e = Faker.RandomNumber.Next(35, 100);
+                    Article use = new Article(winelist[a],Faker.RandomNumber.Next(1,5), Faker.RandomNumber.Next(2015,2022), Faker.RandomNumber.Next(1, 5), d,d+5,75,Faker.RandomNumber.Next(12, 15), grapelist[b], ladderlist[c],e,e,10);
 
                     list.Add(use);
                 }
                 
                 foreach (Article art in list)
                 {
-                    if(Faker.RandomNumber.Next(1,3)== Faker.RandomNumber.Next(1, 3))
-                    {
-                        int a = Faker.RandomNumber.Next(15, 100);
-                        art.StockActual= a;
-                        art.StockProv = a;
-                        art.StockMin = 10;
-                    }
+                    
                     context.Add(art);
                     context.SaveChanges();
                 }

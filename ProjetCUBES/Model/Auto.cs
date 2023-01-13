@@ -15,6 +15,7 @@ namespace ProjetCUBES.Model
         public int AddToStock { get; set; }
         [Required]
         public int AutoRefill { get; set; }
+        public int ID_Auto { get; internal set; }
 
         public Auto() { }
         public Auto(int addtostock,int autorefill) 

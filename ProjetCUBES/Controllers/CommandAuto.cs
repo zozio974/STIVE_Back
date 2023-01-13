@@ -13,6 +13,42 @@ namespace ProjetCUBES.Controllers
     [Route("[controller]/[action]")]
     public class CommandAuto
     {
+        [HttpPut]
+        public void commandeauto_off()
+        {
+            using (Apply context = new Apply())
+            {
+                Auto auto = context.Autos.Where(x => x.ID_Auto == 1).First();
+                auto.AutoRefill=0;
+                context.Update(auto);
+                context.SaveChanges();
+            }
+        }
+
+        [HttpPut]
+        public void commandeauto_on()
+        {
+            using (Apply context = new Apply())
+            {
+                Auto auto = context.Autos.Where(x => x.ID_Auto == 1).First();
+                auto.AutoRefill = 1;
+                context.Update(auto);
+                context.SaveChanges();
+            }
+        }
+
+        [HttpPut]
+        public void quantiteaddtostock(int y)
+        {
+            using (Apply context = new Apply())
+            {
+                Auto auto = context.Autos.Where(x => x.ID_Auto == 1).First();
+                auto.AddToStock = y;
+                context.Update(auto);
+                context.SaveChanges();
+            }
+        }
+
 
     }
 }

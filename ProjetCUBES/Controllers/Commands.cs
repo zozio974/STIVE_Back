@@ -101,6 +101,14 @@ namespace ProjetCUBES.Controllers
                     a += lineCom.Price;
                     context.Update(stock);
                     context.SaveChanges();
+                    Auto auto = context.Autos.Where(x => x.Id == 1).First();
+                    User user = context.Users.Where(x => x.ID_User == 1).First();
+                    if (stock.StockProv < stock.StockMin && auto.AutoRefill == 1)
+                    {
+                        string refe = DataFill.RandomString(5);
+                        addlinecommandsup(stock.ID_Article, refe, auto.AddToStock);
+                        addcommand(refe, user.ID_User);
+                    }
                 }
                 command.Price_Command = a;
                 context.Add(command);

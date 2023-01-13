@@ -152,6 +152,15 @@ namespace ProjetCUBES.Controllers
             }
         }
         [HttpGet]
+        public int getiduser(string login)
+        {
+            using (Apply context = new Apply())
+            {
+                User use = context.Users.Where(x => x.LogInUser == login).First();
+                return use.ID_User;
+            }
+        }
+        [HttpGet]
         public string getidsupplier(string name)
         {
             using (Apply context = new Apply())

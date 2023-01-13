@@ -10,7 +10,7 @@ using ProjetCUBES.Helpers;
 namespace ProjetCUBES.Migrations
 {
     [DbContext(typeof(Class.Apply))]
-    [Migration("20230110085956_InitialCreate")]
+    [Migration("20230113141756_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

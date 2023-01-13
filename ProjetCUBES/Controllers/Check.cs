@@ -95,6 +95,20 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+        [HttpGet]
+
+        public bool userbyloginexist(string login)
+        {
+            using (Apply context = new Apply())
+            {
+                List<User> user = context.Users.Where(x => x.LogInUser == login).ToList();
+                if (user.Any() == false)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
 
         [HttpGet]
 

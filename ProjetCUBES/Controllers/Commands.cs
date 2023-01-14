@@ -236,14 +236,7 @@ namespace ProjetCUBES.Controllers
             {
                 Command comm = context.Commands.Where(x => x.Id_Command == id).First();
                 List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == comm.RefCommand).ToList();
-                foreach (LineCommand line in linecom)
-                {
-                    Article article = context.Articles.Where(x => x.ID_Article == line.Id_article).First();
-                    article.StockActual -= line.Quantity;
-                    article.StockProv -= line.Quantity;
-                    context.Update(article);
-                    context.SaveChanges();
-                }
+               
                 comm.Status_Comman = 2;
                 context.Update(comm);
                 context.SaveChanges();
@@ -260,9 +253,7 @@ namespace ProjetCUBES.Controllers
                 List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == comm.RefCommand).ToList();
                 foreach (LineCommand line in linecom)
                 {
-                    Article article = context.Articles.Where(x => x.ID_Article == line.Id_article).First();
-                    article.StockActual -= line.Quantity;
-                    article.StockProv -= line.Quantity;
+                    Article article = context.Articles.Where(x => x.ID_Article == line.Id_article).First();                   
                     if (article.StockActual < 0)
                     {
                         return false;

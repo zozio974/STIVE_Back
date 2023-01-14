@@ -48,6 +48,16 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
+        [HttpGet]
+        public int displayautovar()
+        {
+
+            using (Apply context = new Apply())
+            {
+                Auto auto = context.Autos.Where(x => x.Id == 1).First();
+                return auto.AutoRefill;
+            }
+        }
 
 
     }

@@ -303,6 +303,22 @@ namespace ProjetCUBES.Controllers
                 return reverse;
             }
         }
+        [HttpGet]
+        public double displaytotalcommand(string refe)
+        {
+            using (Apply context = new Apply())
+            {
+                double a = 0;
+                
+                List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == refe).ToList();
+                foreach (LineCommand line in linecom)
+                {
+                    a += line.Price;
+                }
+                return a;
 
+            }
+
+        }
     }
 }

@@ -31,6 +31,26 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        [HttpGet]
+        public bool add_customersite(string login, string password, string name, string firstname)
+        {
+
+            using (Apply context = new Apply())
+            {
+                User newcust = new User();
+                newcust.LogInUser = login;
+                newcust.PassWordUser = password;
+                newcust.NameUser = name;
+                newcust.FirstNameUser = firstname;
+                newcust.Idjob = 5;
+
+
+                context.Add(newcust);
+                context.SaveChanges();
+                return true;
+            }
+
+        }
         [HttpPost]
         public void add_family(string name)
         {

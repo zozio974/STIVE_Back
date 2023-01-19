@@ -17,11 +17,11 @@ namespace ProjetCUBES.Controllers
     public class Commands
     {
         [HttpPost]
-        public void addlinecommand(int idart,string refcom,int quant)
+        public void addlinecommand(int idart, string refcom, int quant)
         {
             using (Apply context = new Apply())
             {
-                LineCommand lineCommandCust= new LineCommand();
+                LineCommand lineCommandCust = new LineCommand();
                 Article article = context.Articles.Where(x => x.ID_Article == idart).First();
                 lineCommandCust.Id_article = idart;
                 lineCommandCust.Ref_Command = refcom;
@@ -45,13 +45,13 @@ namespace ProjetCUBES.Controllers
                 context.Add(lineCommandCust);
                 context.SaveChanges();
 
-               
+
             }
         }
 
         [HttpPost]
-        public void addcommand(string refcom,int iduser)
-        { 
+        public void addcommand(string refcom, int iduser)
+        {
             using (Apply context = new Apply())
             {
                 double a = 0;
@@ -60,10 +60,10 @@ namespace ProjetCUBES.Controllers
                 command.RefCommand = refcom;
                 command.Status_Comman = 1;
                 command.Date_Command = DateTime.Now.ToString("MM/dd/yyyy");
-                command.Id_User= iduser;
+                command.Id_User = iduser;
                 List<LineCommand> line = context.LineCommands.Where(x => x.Ref_Command == refcom).ToList();
-                
-                
+
+
                 foreach (LineCommand lineCom in line)
                 {
                     Article stock = context.Articles.Where(x => x.ID_Article == lineCom.Id_article).First();
@@ -72,7 +72,7 @@ namespace ProjetCUBES.Controllers
                     context.Update(stock);
                     context.SaveChanges();
                 }
-                command.Price_Command= a;
+                command.Price_Command = a;
                 context.Add(command);
                 context.SaveChanges();
             }
@@ -213,7 +213,7 @@ namespace ProjetCUBES.Controllers
         {
             using (Apply context = new Apply())
             {
-                Command comm = context.Commands.Where(x => x.Id_Command== id).First();
+                Command comm = context.Commands.Where(x => x.Id_Command == id).First();
                 List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == comm.RefCommand).ToList();
                 foreach (LineCommand line in linecom)
                 {
@@ -236,7 +236,7 @@ namespace ProjetCUBES.Controllers
             {
                 Command comm = context.Commands.Where(x => x.Id_Command == id).First();
                 List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == comm.RefCommand).ToList();
-               
+
                 comm.Status_Comman = 2;
                 context.Update(comm);
                 context.SaveChanges();
@@ -244,6 +244,53 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        [HttpGet]
+        public bool cancelcommandclient(int id)
+        {
+            using (Apply context = new Apply())
+            {
+                Command comm = context.Commands.Where(x => x.Id_Command == id).First();
+                List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == comm.RefCommand).ToList();
+                foreach (LineCommand line in linecom)
+                {
+                    Article article = context.Articles.Where(x => x.ID_Article == line.Id_article).First();
+                    article.StockActual += line.Quantity;
+                    article.StockProv += line.Quantity;
+                    context.Update(article);
+                    context.Remove(line);
+                    context.SaveChanges();
+
+                }
+                context.Remove(comm);
+                context.SaveChanges();
+                return true;
+            }
+
+
+        }
+        [HttpPut]
+        public void cancelcommandsup(int id)
+        {
+            using (Apply context = new Apply())
+            {
+                Command comm = context.Commands.Where(x => x.Id_Command == id).First();
+                List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == comm.RefCommand).ToList();
+                foreach (LineCommand line in linecom)
+                {
+                    Article article = context.Articles.Where(x => x.ID_Article == line.Id_article).First();
+                    article.StockProv -= line.Quantity;
+                    
+                    context.Update(article);
+                    context.Remove(line);
+                    context.SaveChanges();
+                }
+                context.Remove(comm);
+                context.SaveChanges();
+
+            }
+
+        }
+
         [HttpGet]
         public bool checkvalidatecommandclient(int id)
         {
@@ -253,7 +300,7 @@ namespace ProjetCUBES.Controllers
                 List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == comm.RefCommand).ToList();
                 foreach (LineCommand line in linecom)
                 {
-                    Article article = context.Articles.Where(x => x.ID_Article == line.Id_article).First();                   
+                    Article article = context.Articles.Where(x => x.ID_Article == line.Id_article).First();
                     if (article.StockActual < 0)
                     {
                         return false;
@@ -272,10 +319,10 @@ namespace ProjetCUBES.Controllers
             {
                 var comres = new List<Command>();
                 List<Command> comm = context.Commands.ToList();
-                foreach(Command com in comm)
+                foreach (Command com in comm)
                 {
                     User user = context.Users.Where(x => x.ID_User == com.Id_User).First();
-                    if(user.Idjob != 5)
+                    if (user.Idjob != 5)
                     {
                         comres.Add(com);
                     }
@@ -309,7 +356,7 @@ namespace ProjetCUBES.Controllers
             using (Apply context = new Apply())
             {
                 double a = 0;
-                
+
                 List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == refe).ToList();
                 foreach (LineCommand line in linecom)
                 {

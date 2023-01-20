@@ -307,10 +307,12 @@ namespace ProjetCUBES.Controllers
             {
                 List<StatusCommand> list = new List<StatusCommand>();
 
-                list.Add(new StatusCommand("En cours"));
+                list.Add(new StatusCommand("En cours de livraison"));
                 list.Add(new StatusCommand("Archivé"));
-                
-                
+                list.Add(new StatusCommand("Précommandé"));
+
+
+
 
                 foreach (StatusCommand stat in list)
                 {

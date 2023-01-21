@@ -10,7 +10,7 @@ using ProjetCUBES.Helpers;
 namespace ProjetCUBES.Migrations
 {
     [DbContext(typeof(Class.Apply))]
-    [Migration("20230119142159_InitialCreate")]
+    [Migration("20230120121651_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -155,6 +155,12 @@ namespace ProjetCUBES.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Id_article")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id_status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id_user")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")

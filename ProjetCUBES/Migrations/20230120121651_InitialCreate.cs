@@ -116,7 +116,9 @@ namespace ProjetCUBES.Migrations
                     Ref_Command = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<double>(type: "double", nullable: false)
+                    Price = table.Column<double>(type: "double", nullable: false),
+                    Id_user = table.Column<int>(type: "int", nullable: false),
+                    Id_status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

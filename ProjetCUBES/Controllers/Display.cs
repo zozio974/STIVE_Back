@@ -315,7 +315,5 @@ namespace ProjetCUBES.Controllers
                 return list1;
             }
         }
-
-
     }
 }

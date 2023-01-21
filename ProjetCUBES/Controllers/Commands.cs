@@ -16,8 +16,56 @@ namespace ProjetCUBES.Controllers
     [Route("[controller]/[action]")]
     public class Commands
     {
+        [HttpGet]
+        public  int getrefcom()
+        {
+            int a = 0;
+            using (Apply context = new Apply())
+            {
+                List<Command> comm = new List<Command>();
+                
+
+                do
+                {
+                    comm = context.Commands.Where(x => x.RefCommand == a.ToString()).ToList();
+                    if (comm.Any() == true )
+                    {
+                        a++; 
+                    }
+
+                   
+
+                } while (comm.Any() == true) ;
+                return a;
+            }
+                   
+            
+        }
+        [HttpGet]
+        public int getrefcomsite(int iduser)
+        {
+            int a = 0;
+            using (Apply context = new Apply())
+            {
+                
+                List<LineCommand> comm = context.LineCommands.Where(x => x.Id_user == iduser && x.Id_status ==1).ToList();
+
+                do
+                {
+                    if (comm.Any() == true)
+                    {
+                        LineCommand com = context.LineCommands.Where(x => x.Id_user == iduser && x.Id_status == 1).First();
+                        return Convert.ToInt32(com.Ref_Command);
+                    }
+                    a++;
+                } while (comm.Any() == true);
+            }
+            return a;
+
+
+        }
         [HttpPost]
-        public void addlinecommand(int idart, string refcom, int quant)
+        public void addlinecommand(int idart, string refcom, int quant,int iduser)
         {
             using (Apply context = new Apply())
             {
@@ -26,13 +74,37 @@ namespace ProjetCUBES.Controllers
                 lineCommandCust.Id_article = idart;
                 lineCommandCust.Ref_Command = refcom;
                 lineCommandCust.Quantity = quant;
+                lineCommandCust.Id_user= iduser;
+                lineCommandCust.Id_status = 2;
                 lineCommandCust.Price = quant * article.Price;
                 context.Add(lineCommandCust);
                 context.SaveChanges();
             }
         }
+        [HttpGet]
+        public bool addlinecommandsite(int idart, int quant, int iduser)
+        {
+            using (Apply context = new Apply())
+            {
+                int a = getrefcom();
+                LineCommand lineCommandCust = new LineCommand();
+
+                Article article = context.Articles.Where(x => x.ID_Article == idart).First();
+                lineCommandCust.Id_article = idart;
+                lineCommandCust.Ref_Command = a.ToString();
+                lineCommandCust.Quantity = quant;
+                lineCommandCust.Id_user = iduser;
+                lineCommandCust.Id_status = 1;
+                lineCommandCust.Price = quant * article.Price;
+                context.Add(lineCommandCust);
+                context.SaveChanges();
+            }
+            return true;
+
+        }
+
         [HttpPost]
-        public void addlinecommandsup(int idart, string refcom, int quant)
+        public void addlinecommandsup(int idart, string refcom, int quant,int iduser)
         {
             using (Apply context = new Apply())
             {
@@ -41,6 +113,9 @@ namespace ProjetCUBES.Controllers
                 lineCommandCust.Id_article = idart;
                 lineCommandCust.Ref_Command = refcom;
                 lineCommandCust.Quantity = quant;
+                lineCommandCust.Id_user = iduser;
+                lineCommandCust.Id_status = 2;
+
                 lineCommandCust.Price = quant * article.PriceSup;
                 context.Add(lineCommandCust);
                 context.SaveChanges();
@@ -77,6 +152,37 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
+        [HttpGet]
+        public bool addcommandsite(string refcom, string email)
+        {
+            using (Apply context = new Apply())
+            {
+                User user = context.Users.Where(x => x.LogInUser == email).First();
+
+                double a = 0;
+                Model.Command command = new Model.Command();
+                command.RefCommand = refcom;
+                command.Status_Comman = 3;
+                command.Date_Command = DateTime.Now.ToString("MM/dd/yyyy");
+                command.Id_User = user.ID_User;
+                List<LineCommand> line = context.LineCommands.Where(x => x.Ref_Command == refcom).ToList();
+
+
+                foreach (LineCommand lineCom in line)
+                {
+                    Article stock = context.Articles.Where(x => x.ID_Article == lineCom.Id_article).First();
+                    a += lineCom.Price;
+                    lineCom.Id_status = 2;
+                    context.Update(lineCom);
+                    context.Update(stock);
+                    context.SaveChanges();
+                }
+                command.Price_Command = a;
+                context.Add(command);
+                context.SaveChanges();
+            }
+            return true;
+        }
 
         [HttpPost]
         public void addcommandclient(string refcom, int iduser)
@@ -105,8 +211,8 @@ namespace ProjetCUBES.Controllers
                     User user = context.Users.Where(x => x.ID_User == 1).First();
                     if (stock.StockProv < stock.StockMin && auto.AutoRefill == 1)
                     {
-                        string refe = DataFill.RandomString(5);
-                        addlinecommandsup(stock.ID_Article, refe, auto.AddToStock);
+                        string refe = getrefcom().ToString();
+                        addlinecommandsup(stock.ID_Article, refe, auto.AddToStock,user.ID_User);
                         addcommand(refe, user.ID_User);
                     }
                 }
@@ -143,8 +249,8 @@ namespace ProjetCUBES.Controllers
                 User user = context.Users.Where(x => x.ID_User == 1).First();
                 if (stock.StockProv < stock.StockMin && auto.AutoRefill == 1)
                 {
-                    string a = DataFill.RandomString(5);
-                    addlinecommandsup(idstock, a, auto.AddToStock);
+                    string a = getrefcom().ToString();
+                    addlinecommandsup(idstock, a, auto.AddToStock, user.ID_User);
                     addcommand(a, user.ID_User);
                 }
             }
@@ -167,8 +273,8 @@ namespace ProjetCUBES.Controllers
                 User user = context.Users.Where(x => x.ID_User == 1).First();
                 if (stock.StockProv < stock.StockMin && auto.AutoRefill == 1)
                 {
-                    string a = DataFill.RandomString(5);
-                    addlinecommandsup(idstock, a, auto.AddToStock);
+                    string a = getrefcom().ToString();
+                    addlinecommandsup(idstock, a, auto.AddToStock, user.ID_User);
                     addcommand(a, user.ID_User);
                 }
             }
@@ -191,9 +297,9 @@ namespace ProjetCUBES.Controllers
                 User user = context.Users.Where(x => x.ID_User == 1).First();
                 if (stock.StockProv < stock.StockMin && auto.AutoRefill == 1)
                 {
-                    string a = DataFill.GetRandomPassword(5);
-                    addlinecommandsup(idstock, a, auto.AddToStock);
-                    addcommand(a, user.ID_User);
+                    int a = getrefcom();
+                    addlinecommandsup(idstock, a.ToString(), auto.AddToStock,user.ID_User);
+                    addcommand(a.ToString(), user.ID_User);
                 }
             }
         }
@@ -236,7 +342,33 @@ namespace ProjetCUBES.Controllers
             {
                 Command comm = context.Commands.Where(x => x.Id_Command == id).First();
                 List<LineCommand> linecom = context.LineCommands.Where(x => x.Ref_Command == comm.RefCommand).ToList();
+                if (comm.Status_Comman== 3)
+                {
+                    comm.Status_Comman = 1;
+                    context.Update(comm);
+                    context.SaveChanges();
 
+
+                    foreach (LineCommand line in linecom)
+                    {
+                        Article stock = context.Articles.Where(x => x.ID_Article == line.Id_article).First();
+                        stock.StockProv -= line.Quantity;
+                        stock.StockActual -= line.Quantity;
+                        
+                        context.Update(stock);
+                        context.SaveChanges();
+                        Auto auto = context.Autos.Where(x => x.Id == 1).First();
+                        User user = context.Users.Where(x => x.ID_User == 1).First();
+                        if (stock.StockProv < stock.StockMin && auto.AutoRefill == 1)
+                        {
+                            string refe = getrefcom().ToString();
+                            addlinecommandsup(stock.ID_Article, refe, auto.AddToStock, user.ID_User);
+                            addcommand(refe, user.ID_User);
+                        }
+                    }
+                    return;
+
+                }
                 comm.Status_Comman = 2;
                 context.Update(comm);
                 context.SaveChanges();

@@ -307,10 +307,12 @@ namespace ProjetCUBES.Controllers
             {
                 List<StatusCommand> list = new List<StatusCommand>();
 
-                list.Add(new StatusCommand("En cours"));
+                list.Add(new StatusCommand("En cours de livraison"));
                 list.Add(new StatusCommand("Archivé"));
-                
-                
+                list.Add(new StatusCommand("Précommandé"));
+
+
+
 
                 foreach (StatusCommand stat in list)
                 {
@@ -330,18 +332,16 @@ namespace ProjetCUBES.Controllers
                 for (int i=0; i < 20; i++)
                 {
                     
-                    string b = $"F{rand + i}";
                     int c = Faker.RandomNumber.Next(1, 50);
-                    list.Add(new Command(b, DateTime.Now.ToString("MM/dd/yyyy"), Faker.RandomNumber.Next(20, 450),2,1));
-                    list2.Add(new LineCommand(Faker.RandomNumber.Next(1, 199), b, c, c * Faker.RandomNumber.Next(7, 20)));
+                    list.Add(new Command(i.ToString(), DateTime.Now.ToString("MM/dd/yyyy"), Faker.RandomNumber.Next(20, 450),2,1));
+                    list2.Add(new LineCommand(Faker.RandomNumber.Next(1, 199), i.ToString(), c, c * Faker.RandomNumber.Next(7, 20),1,2));
                 }
-                for (int i = 0; i < 20; i++)
+                for (int i = 20; i < 40; i++)
                 {
-                    string b = $"C{rand + i}";
-
+                    int numb = Faker.RandomNumber.Next(10, 100);
                     int c = Faker.RandomNumber.Next(1, 50);
-                    list.Add(new Command(b, DateTime.Now.ToString("MM/dd/yyyy"), Faker.RandomNumber.Next(20, 450), 2, Faker.RandomNumber.Next(10, 100)));
-                    list2.Add(new LineCommand(Faker.RandomNumber.Next(1, 199), b, c, c * Faker.RandomNumber.Next(7, 20)));
+                    list.Add(new Command(i.ToString(), DateTime.Now.ToString("MM/dd/yyyy"), Faker.RandomNumber.Next(20, 450), 2,numb ));
+                    list2.Add(new LineCommand(Faker.RandomNumber.Next(1, 199), i.ToString(), c, c * Faker.RandomNumber.Next(7, 20),numb,2));
                 }
 
 

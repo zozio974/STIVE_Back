@@ -155,6 +155,12 @@ namespace ProjetCUBES.Migrations
                     b.Property<int>("Id_article")
                         .HasColumnType("int");
 
+                    b.Property<int>("Id_status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Id_user")
+                        .HasColumnType("int");
+
                     b.Property<double>("Price")
                         .HasColumnType("double");
 

@@ -47,20 +47,35 @@ namespace ProjetCUBES.Controllers
             int a = 0;
             using (Apply context = new Apply())
             {
-                
-                List<LineCommand> comm = context.LineCommands.Where(x => x.Id_user == iduser && x.Id_status ==1).ToList();
+
+                List<LineCommand> comm = context.LineCommands.Where(x => x.Id_user == iduser && x.Id_status == 1).ToList();
+
+
+                if (comm.Any() == true)
+                {
+                    LineCommand com = context.LineCommands.Where(x => x.Id_user == iduser && x.Id_status == 1).First();
+                    return Convert.ToInt32(com.Ref_Command);
+                }
+            }
+            using (Apply context = new Apply())
+            {
+                List<LineCommand> comm = new List<LineCommand>();
+
 
                 do
                 {
+                    comm = context.LineCommands.Where(x => x.Ref_Command == a.ToString()).ToList();
                     if (comm.Any() == true)
                     {
-                        LineCommand com = context.LineCommands.Where(x => x.Id_user == iduser && x.Id_status == 1).First();
-                        return Convert.ToInt32(com.Ref_Command);
+                        a++;
                     }
-                    a++;
+
+
+
                 } while (comm.Any() == true);
+                return a;
+
             }
-            return a;
 
 
         }
@@ -86,7 +101,7 @@ namespace ProjetCUBES.Controllers
         {
             using (Apply context = new Apply())
             {
-                int a = getrefcom();
+                int a = getrefcomsite(iduser);
                 LineCommand lineCommandCust = new LineCommand();
 
                 Article article = context.Articles.Where(x => x.ID_Article == idart).First();
@@ -153,11 +168,11 @@ namespace ProjetCUBES.Controllers
             }
         }
         [HttpGet]
-        public bool addcommandsite(string refcom, string email)
+        public bool addcommandsite(string refcom, int iduser)
         {
             using (Apply context = new Apply())
             {
-                User user = context.Users.Where(x => x.LogInUser == email).First();
+                User user = context.Users.Where(x => x.ID_User == iduser).First();
 
                 double a = 0;
                 Model.Command command = new Model.Command();

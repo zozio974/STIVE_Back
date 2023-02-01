@@ -12,6 +12,9 @@ namespace ProjetCUBES.Controllers
     [Route("[controller]/[action]")]
     public class Check
     {
+        /// <summary>
+        ///  Vérifie si un fournisseur existe par son id
+        /// </summary>
         [HttpGet]
         public bool checksupplierexist(int a)
         {
@@ -27,6 +30,9 @@ namespace ProjetCUBES.Controllers
 
                 
         }
+        /// <summary>
+        ///  Vérifie si une famille existe par son id
+        /// </summary>
         [HttpGet]
         public bool checkfamilyexist(int a)
         {
@@ -40,6 +46,9 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+        /// <summary>
+        ///  Vérifie si une fonction existe par son id
+        /// </summary>
         [HttpGet]
         public bool checkjobexist(int a)
         {
@@ -53,6 +62,9 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+        /// <summary>
+        ///  Vérifie si un article existe par son nom
+        /// </summary>
         [HttpGet]
 
         public bool articlebynameexist(string name)
@@ -67,6 +79,9 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+        /// <summary>
+        ///  Vérifie si un article a un stock
+        /// </summary>
         [HttpGet]
 
         public bool checkarticlestockexist(int a)
@@ -81,6 +96,9 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+        /// <summary>
+        ///  Vérifie si un client existe par son nom
+        /// </summary>
         [HttpGet]
 
         public bool custbynameexist(string name)
@@ -95,6 +113,9 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+        /// <summary>
+        ///  Vérifie si un client existe par son login
+        /// </summary>
         [HttpGet]
 
         public bool userbyloginexist(string login)
@@ -108,8 +129,9 @@ namespace ProjetCUBES.Controllers
                 }
                 return true;
             }
-        }
-
+        }/// <summary>
+         ///  Vérifie si la commande est archivée ou non
+         /// </summary>
         [HttpGet]
 
         public bool checkstatuscommand(int id)
@@ -124,6 +146,9 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+        /// <summary>
+        ///  Vérifie si une commande existe par sa référence
+        /// </summary>
         [HttpGet]
 
         public bool checkrefcommand(string refcom)

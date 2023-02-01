@@ -14,6 +14,9 @@ namespace ProjetCUBES.Controllers
 
     public class PutTable
     {
+        /// <summary>
+        /// Modifie une ou plusieurs valeur d'un client en fonction de son id
+        /// </summary>
         [HttpPut]
         public void putcustomer(int ID,string? login = "", string? password = "", string? name = "", string? firstname = "")
         {
@@ -56,6 +59,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        /// Modifie une ou plusieurs valeur d'un employé en fonction de son id
+        /// </summary>
         [HttpPut]
         public void putemployer(int ID, string? idjob="",string? login = "", string? password = "", string? name = "", string? firstname = "")
         {
@@ -105,6 +111,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        /// Modifie une ou plusieurs valeur d'une famille en fonction de son id
+        /// </summary>
         [HttpPut]
         public void putfamily(int ID,string? name = "")
         {
@@ -123,6 +132,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        /// Modifie une ou plusieurs valeur d'un fournisseur en fonction de son id
+        /// </summary>
         [HttpPut]
         public void putsupplier(int ID, string? name = "")
         {
@@ -137,6 +149,9 @@ namespace ProjetCUBES.Controllers
                 }
             }
         }
+        /// <summary>
+        /// Modifie une ou plusieurs valeur d'une fonction en fonction de son id
+        /// </summary>
         [HttpPut]
         public void putjob(int ID, string? name = "")
         {
@@ -152,6 +167,9 @@ namespace ProjetCUBES.Controllers
                 }
             }
         }
+        /// <summary>
+        /// Modifie une ou plusieurs valeur d'un article en fonction de son id
+        /// </summary>
         [HttpPut]
         public void putarticle(int ID, string? name = "", string? idsup = "", string? datefill = "", string? idfamily = "",
             string? pricesup = "", string? price = "", string? volume = "", string? degree = "", string? grape = "", string? ladder = "")

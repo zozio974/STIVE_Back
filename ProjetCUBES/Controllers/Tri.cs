@@ -17,7 +17,9 @@ namespace ProjetCUBES.Controllers
     public class Tri
     {
 
-
+        /// <summary>
+        /// Affiche tout les articles qui ont l'id d'une famille
+        /// </summary>
         [HttpGet]
         public List<Article> displayarticlebyfamily(int ID)
         {
@@ -27,6 +29,9 @@ namespace ProjetCUBES.Controllers
                 return article;
             }
         }
+        /// <summary>
+        /// Affiche tout les articles qui ont l'id d'un fournisseur
+        /// </summary>
         [HttpGet]
 
         public List<Article> displayarticlebySupplier(int ID)
@@ -37,6 +42,9 @@ namespace ProjetCUBES.Controllers
                 return article;
             }
         }
+        /// <summary>
+        /// Affiche tout les articles qui ont l'id d'une famille et l'id d'un fournisseur
+        /// </summary>
         [HttpGet]
 
         public List<Article> displayarticlebySupFam(int idsup,int idfam)
@@ -47,6 +55,9 @@ namespace ProjetCUBES.Controllers
                 return article;
             }
         }
+        /// <summary>
+        /// Affiche tout les clients qui ont un nom donné
+        /// </summary>
         [HttpGet]
 
         public List<User> displaycustbyname(string name)

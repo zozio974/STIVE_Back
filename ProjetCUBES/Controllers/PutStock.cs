@@ -15,7 +15,9 @@ namespace ProjetCUBES.Controllers
 
     public class PutStock
     {
-   
+        /// <summary>
+        /// Ajoute une unité au stock d'un article en fonction de l'id de l'article
+        /// </summary>
         [HttpPut]
         public void addstockunitid(int idstock)
         {
@@ -28,8 +30,10 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
-       
-        
+
+        /// <summary>
+        /// Ajoute un nombre au stock d'un article en fonction de l'id de l'article
+        /// </summary>
         [HttpPut]
         public void addstockmulid(int idstock, int i)
         {
@@ -43,8 +47,10 @@ namespace ProjetCUBES.Controllers
             }
 
         }
-    
-        
+
+        /// <summary>
+        /// Remplace le stock minimum par un nombre d'un article en fonction de son id
+        /// </summary>
         [HttpPut]
         public void putstockmin(int idstock, int i)
         {

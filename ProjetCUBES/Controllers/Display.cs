@@ -13,6 +13,9 @@ namespace ProjetCUBES.Controllers
     [Route("[controller]/[action]")]
     public class Display
     {
+        /// <summary>
+        /// Affiche toute la table article
+        /// </summary>
         [HttpGet]
         public List<Article> displayarticle()
         {
@@ -22,6 +25,9 @@ namespace ProjetCUBES.Controllers
                 return article;
             }
         }
+        /// <summary>
+        /// Affiche un article en fonction de son id
+        /// </summary>
         [HttpGet]
         public Article displayarticlebyid(int ID)
         {
@@ -32,6 +38,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        /// Affiche un article en fonction de son nom
+        /// </summary>
         [HttpGet]
         
         public List<Article> displayarticlebyname(string name)
@@ -43,7 +52,9 @@ namespace ProjetCUBES.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Affiche tout les clients 
+        /// </summary>
         [HttpGet]
 
         public List<User> displaycustomers()
@@ -54,6 +65,9 @@ namespace ProjetCUBES.Controllers
                 return customer;
             }
         }
+        /// <summary>
+        /// Affiche un utilisateur en fonction de son id
+        /// </summary>
         [HttpGet]
         public User displayusersbyid(int ID)
         {
@@ -64,6 +78,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        /// Affiche tout les employés
+        /// </summary>
         [HttpGet]
         public List<User> displayemployers()
         {
@@ -73,7 +90,9 @@ namespace ProjetCUBES.Controllers
                 return customer;
             }
         }
-     
+        /// <summary>
+        /// Affiche toute les familles
+        /// </summary>
         [HttpGet]
         public List<Family> displayfamily()
         {
@@ -83,6 +102,9 @@ namespace ProjetCUBES.Controllers
                 return family;
             }
         }
+        /// <summary>
+        /// Affiche une famille en fonction de son id
+        /// </summary>
         [HttpGet]
         public Family displayfamilybyid(int ID)
         {
@@ -93,8 +115,10 @@ namespace ProjetCUBES.Controllers
             }
 
         }
-        
-       
+
+        /// <summary>
+        /// Affiche toutes les fonctions
+        /// </summary>
         [HttpGet]
         public List<Job> displayjob()
         {
@@ -104,6 +128,9 @@ namespace ProjetCUBES.Controllers
                 return job;
             }
         }
+        /// <summary>
+        /// Affiche une fonction en fonction de son id
+        /// </summary>
         [HttpGet]
         public Job displayjobbyid(int ID)
         {
@@ -114,6 +141,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        /// Affiche tout les fournisseurs
+        /// </summary>
         [HttpGet]
         public List<Supplier> displaysup()
         {
@@ -123,6 +153,9 @@ namespace ProjetCUBES.Controllers
                 return sup;
             }
         }
+        /// <summary>
+        /// Affiche un fournisseur en fonction de son id
+        /// </summary>
         [HttpGet]
         public Supplier displaysupbyid(int ID)
         {
@@ -133,6 +166,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        /// Retourne l'id d'une famille en fonction de son nom
+        /// </summary>
         [HttpGet]
         public string getidfamily(string name)
         {
@@ -142,6 +178,9 @@ namespace ProjetCUBES.Controllers
                 return fam.ID_Family.ToString();
             }
         }
+        /// <summary>
+        /// Retourne l'id d'une fonction en fonction de son nom
+        /// </summary>
         [HttpGet]
         public string getidjob(string name)
         {
@@ -151,6 +190,9 @@ namespace ProjetCUBES.Controllers
                 return job.ID_Job.ToString();
             }
         }
+        /// <summary>
+        /// Retourne l'id d'un utilisateur en fonction de son login
+        /// </summary>
         [HttpGet]
         public int getiduser(string login)
         {
@@ -160,6 +202,9 @@ namespace ProjetCUBES.Controllers
                 return use.ID_User;
             }
         }
+        /// <summary>
+        /// Retourne l'id d'un fournisseur en fonction de son nom
+        /// </summary>
         [HttpGet]
         public string getidsupplier(string name)
         {
@@ -169,6 +214,9 @@ namespace ProjetCUBES.Controllers
                 return sup.Id.ToString();
             }
         }
+        /// <summary>
+        /// Retourne le nom d'une famille en fonction de son id
+        /// </summary>
         [HttpGet]
         public string getnamefamily(int id)
         {
@@ -178,6 +226,9 @@ namespace ProjetCUBES.Controllers
                 return fam.NameFamily.ToString();
             }
         }
+        /// <summary>
+        /// Retourne le nom d'un fournisseur en fonction de son id
+        /// </summary>
         [HttpGet]
         public string getnamesupplier(int id)
         {
@@ -187,6 +238,9 @@ namespace ProjetCUBES.Controllers
                 return sup.Name.ToString();
             }
         }
+        /// <summary>
+        /// Retourne le nom d'une fonction en fonction de son id
+        /// </summary>
         [HttpGet]
         public string getnamejob(int id)
         {
@@ -196,6 +250,9 @@ namespace ProjetCUBES.Controllers
                 return job.JobName.ToString();
             }
         }
+        /// <summary>
+        /// Retourne une liste de nom de fournisseurs en fonction d'une liste d'id
+        /// </summary>
         [HttpGet]
         public List<string> getlistnamesup([FromQuery] int[] listOfIds)
         {
@@ -209,6 +266,9 @@ namespace ProjetCUBES.Controllers
                 return list1;
             }
         }
+        /// <summary>
+        /// Retourne une liste de nom de famille de vins en fonction d'une liste d'id
+        /// </summary>
         [HttpGet]
         public List<string> getlistnamefam([FromQuery] int[] listOfIds)
         {
@@ -222,6 +282,9 @@ namespace ProjetCUBES.Controllers
                 return list1;
             }
         }
+        /// <summary>
+        /// Retourne une liste de nom de fonction en fonction d'une liste d'id
+        /// </summary>
         [HttpGet]
         public List<string> getlistnamejob([FromQuery] int[] listOfIds)
         {
@@ -235,19 +298,10 @@ namespace ProjetCUBES.Controllers
                 return list1;
             }
         }
-        [HttpGet]
-        public List<Article> getlistarticleinstock([FromQuery] int[] listOfIds)
-        {
-            using (Apply context = new Apply())
-            {
-                List<Article> list1 = new List<Article>();
-                foreach (int s in listOfIds)
-                {
-                    list1.Add(displayarticlebyid(s));
-                }
-                return list1;
-            }
-        }
+        /// <summary>
+        /// Retourne le nom d'un utilisateur en fonction de son id
+        /// </summary>
+       
         [HttpGet]
         public string getnameuser(int ID)
         {
@@ -257,6 +311,9 @@ namespace ProjetCUBES.Controllers
                 return user.NameUser.ToString();
             }
         }
+        /// <summary>
+        /// Retourne une liste de nom d'utilisateur en fonction d'une liste d'id
+        /// </summary>
         [HttpGet]
         public List<string> getlistnameuser([FromQuery] int[] listOfIds)
         {
@@ -270,6 +327,9 @@ namespace ProjetCUBES.Controllers
                 return list1;
             }
         }
+        /// <summary>
+        /// Retourne le statut d'une commande en fonction de son id
+        /// </summary>
         [HttpGet]
         public string getnamestatus(int ID)
         {
@@ -279,6 +339,9 @@ namespace ProjetCUBES.Controllers
                 return stat.Name.ToString();
             }
         }
+        /// <summary>
+        /// Retourne une liste de nom de statu en fonction d'une liste d'id
+        /// </summary>
         [HttpGet]
         public List<string> getlistnamestatus([FromQuery] int[] listOfIds)
         {
@@ -292,6 +355,9 @@ namespace ProjetCUBES.Controllers
                 return list1;
             }
         }
+        /// <summary>
+        /// Retourne le nom d'un article en fonction de son id
+        /// </summary>
         [HttpGet]
         public string getnamearticle(int ID)
         {
@@ -300,9 +366,12 @@ namespace ProjetCUBES.Controllers
                 Article art = context.Articles.Where(x => x.ID_Article == ID).First();
                 return art.NameArticle.ToString();
             }
-        }
-
+        } 
+        /// <summary>
+          /// Retourne une liste de nom d'article en fonction d'une liste d'id
+          /// </summary>
         [HttpGet]
+       
         public List<string> getlistnamearticle([FromQuery] int[] listOfIds)
         {
             using (Apply context = new Apply())

@@ -12,6 +12,9 @@ namespace ProjetCUBES.Controllers
     [Route("[controller]/[action]")]
     public class Delete
     {
+        /// <summary>
+        /// Supprime un utilisateur de la table selon son id
+        /// </summary>
         [HttpDelete]
         public void delete_user(int ID)
         {
@@ -22,7 +25,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
-       
+        /// <summary>
+        /// Supprime une famille de la table selon son id
+        /// </summary>
         [HttpDelete]
         public void delete_family(int ID)
         {
@@ -33,6 +38,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
+        /// <summary>
+        /// Supprime un article de la table selon son id
+        /// </summary>
         [HttpDelete]
         public void delete_article(int ID)
         {
@@ -43,6 +51,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
+        /// <summary>
+        /// Supprime un fournisseur de la table selon son id
+        /// </summary>
         [HttpDelete]
         public void delete_sup(int ID)
         {
@@ -53,6 +64,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
+        /// <summary>
+        /// Supprime une fonction de la table selon son id
+        /// </summary>
         [HttpDelete]
         public void delete_job(int ID)
         {
@@ -63,6 +77,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
+        /// <summary>
+        /// Supprime une ligne de commande de la table selon son id
+        /// </summary>
         [HttpDelete]
         public void delete_linecommand(int ID)
         {
@@ -73,6 +90,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
+        /// <summary>
+        /// Supprime une ligne de commande du panier site de la table selon son id
+        /// </summary>
         [HttpGet]
         public bool deletelinecommandsite(int ID)
         {

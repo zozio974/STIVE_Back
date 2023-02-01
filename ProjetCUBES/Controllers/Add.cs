@@ -5,13 +5,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProjetCUBES.Model;
 using System;
 using System.Security.Cryptography;
+using System.Diagnostics.CodeAnalysis;
 using static ProjetCUBES.Helpers.Class;
 namespace ProjetCUBES.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
     public class Add
-    {
+    {   
+        /// <summary>
+        ///  Ajouter un client dans la table utilisateur
+        /// </summary>
+       
+       
         [HttpPost]
         public void add_customer(string login, string password, string name, string firstname)
         {
@@ -31,6 +37,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        ///  Ajouter un client dans la table utilisateur a partir du site
+        /// </summary>
         [HttpGet]
         public bool add_customersite(string login, string password, string name, string firstname)
         {
@@ -51,6 +60,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        ///  Ajouter une nouvelle famille de vin dans la table famille
+        /// </summary>
         [HttpPost]
         public void add_family(string name)
         {
@@ -64,6 +76,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        ///  Ajouter un nouveau fournisseur dans la table fournisseur
+        /// </summary>
         [HttpPost]
         public void add_supplier(string name)
         {
@@ -77,6 +92,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        ///  Ajouter un employé dans la table utilisateur
+        /// </summary>
         [HttpPost]
         public void add_employer(string login, string password, string name, string firstname, int idjob)
         {
@@ -94,6 +112,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
+        /// <summary>
+        ///  Ajouter une nouvelle fonction dans la table fonction
+        /// </summary>
         [HttpPost]
         public void add_job(string name)
         {
@@ -107,7 +128,11 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        ///  Ajouter un article dans la table article
+        /// </summary>
         [HttpPost]
+
         public void add_article(string name, int idprovider,int datefill,int idfamily,double pricesup, double price, int volume,int degree,string grape,string ladder)
         {
 

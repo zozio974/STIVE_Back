@@ -13,6 +13,9 @@ namespace ProjetCUBES.Controllers
     [Route("[controller]/[action]")]
     public class Connect
     {
+        /// <summary>
+        /// Test la connexion d'un client suivant son login et mdp
+        /// </summary>
         [HttpGet]
         public bool connectcust(string? username = "", string? password = "")
         {
@@ -31,6 +34,9 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+        /// <summary>
+        /// Test la connexion d'un employé suivant son login et mdp
+        /// </summary>
         [HttpGet]
         public bool connectemp(string? username = "", string? password = "")
         {
@@ -49,6 +55,9 @@ namespace ProjetCUBES.Controllers
                 return true;
             }
         }
+        /// <summary>
+        /// Affiche un utilisateur selon son login
+        /// </summary>
         [HttpGet]
         public User getjobbylogin(string name)
         {

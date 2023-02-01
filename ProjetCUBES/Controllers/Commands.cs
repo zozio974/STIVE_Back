@@ -16,6 +16,9 @@ namespace ProjetCUBES.Controllers
     [Route("[controller]/[action]")]
     public class Commands
     {
+        /// <summary>
+        ///  Génére une référence de commande qui n'existe pas
+        /// </summary>
         [HttpGet]
         public  int getrefcom()
         {
@@ -41,6 +44,9 @@ namespace ProjetCUBES.Controllers
                    
             
         }
+        /// <summary>
+        ///  Génére une référence de commande qui n'existe pas pour un site ou revient sur la commande deja en cours
+        /// </summary>
         [HttpGet]
         public int getrefcomsite(int iduser)
         {
@@ -79,6 +85,9 @@ namespace ProjetCUBES.Controllers
 
 
         }
+        /// <summary>
+        /// Ajoute une ligne de commande avec un article et sa quantité pour une commande avec sa référence
+        /// </summary>
         [HttpPost]
         public void addlinecommand(int idart, string refcom, int quant,int iduser)
         {
@@ -96,6 +105,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
+        /// <summary>
+        /// Ajoute une ligne de commande site avec un article et sa quantité pour une commande avec sa référence
+        /// </summary>
         [HttpGet]
         public bool addlinecommandsite(int idart, int quant, int iduser)
         {
@@ -117,6 +129,9 @@ namespace ProjetCUBES.Controllers
             return true;
 
         }
+        /// <summary>
+        /// Ajoute une ligne de commande fournisseur avec un article et sa quantité pour une commande avec sa référence
+        /// </summary>
 
         [HttpPost]
         public void addlinecommandsup(int idart, string refcom, int quant,int iduser)
@@ -138,7 +153,9 @@ namespace ProjetCUBES.Controllers
 
             }
         }
-
+        /// <summary>
+        /// Ajoute une commande fournisseur
+        /// </summary>
         [HttpPost]
         public void addcommand(string refcom, int iduser)
         {
@@ -167,6 +184,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
+        /// <summary>
+        /// Ajoute une commande via le site
+        /// </summary>
         [HttpGet]
         public bool addcommandsite(string refcom, int iduser)
         {
@@ -198,7 +218,9 @@ namespace ProjetCUBES.Controllers
             }
             return true;
         }
-
+        /// <summary>
+        /// Ajoute une commande client via l'application
+        /// </summary>
         [HttpPost]
         public void addcommandclient(string refcom, int iduser)
         {
@@ -236,7 +258,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
-
+        /// <summary>
+        /// Affiche toute les lignes de commande d'une commande suivant sa référence
+        /// </summary>
         [HttpGet]
         public List<LineCommand> displaylinecommand(string refcom)
         {
@@ -246,6 +270,9 @@ namespace ProjetCUBES.Controllers
                 return line;
             }
         }
+        /// <summary>
+        /// Baisse le stock d'un article  d'une certaine quantité suivant l'id de cet article
+        /// </summary>
         [HttpPut]
         public void dropstockmulid(int idstock, int i)
         {
@@ -270,7 +297,11 @@ namespace ProjetCUBES.Controllers
                 }
             }
         }
+        /// <summary>
+        /// Baisse le stock d'un article  de 1 suivant l'id de cet article
+        /// </summary>
         [HttpPut]
+        
         public void dropstockunitid(int idstock)
         {
             using (Apply context = new Apply())
@@ -294,6 +325,9 @@ namespace ProjetCUBES.Controllers
                 }
             }
         }
+        /// <summary>
+        /// Modifie le stock d'un article  par une valeur suivant l'id de cet article
+        /// </summary>
         [HttpPut]
         public void putstock(int idstock, int i)
         {
@@ -318,6 +352,9 @@ namespace ProjetCUBES.Controllers
                 }
             }
         }
+        /// <summary>
+        /// Affiche la liste des commandes avec les commandes les plus récentes affichées en premier
+        /// </summary>
         [HttpGet]
         public List<Command> displaycommands()
         {
@@ -329,6 +366,9 @@ namespace ProjetCUBES.Controllers
                 return reverse;
             }
         }
+        /// <summary>
+        /// Valide une commande fournisseur : change son statut et actualise le stock
+        /// </summary>
         [HttpPost]
         public void validatecommand(int id)
         {
@@ -350,6 +390,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        /// Valide une commande client : change son statut et actualise le stock
+        /// </summary>
         [HttpPost]
         public void validatecommandclient(int id)
         {
@@ -391,6 +434,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        /// Annule une commande client 
+        /// </summary>
         [HttpGet]
         public bool cancelcommandclient(int id)
         {
@@ -415,6 +461,9 @@ namespace ProjetCUBES.Controllers
 
 
         }
+        /// <summary>
+        /// Annule une commande fournisseur 
+        /// </summary>
         [HttpPut]
         public void cancelcommandsup(int id)
         {
@@ -437,7 +486,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
-
+        /// <summary>
+        /// Vérifie si on peut valider une commande client, il faut pas que le stock devienne négatif aprés la commande
+        /// </summary>
         [HttpGet]
         public bool checkvalidatecommandclient(int id)
         {
@@ -458,6 +509,9 @@ namespace ProjetCUBES.Controllers
             }
 
         }
+        /// <summary>
+        /// Affiche toute les commandes fournisseur
+        /// </summary>
         [HttpGet]
 
         public List<Command> displaycommandsup()
@@ -478,6 +532,9 @@ namespace ProjetCUBES.Controllers
                 return reverse;
             }
         }
+        /// <summary>
+        /// Affiche toute les commandes clients
+        /// </summary>
         [HttpGet]
         public List<Command> displaycommandclient()
         {
@@ -497,6 +554,9 @@ namespace ProjetCUBES.Controllers
                 return reverse;
             }
         }
+        /// <summary>
+        /// Affiche le prix total d'une commande
+        /// </summary>
         [HttpGet]
         public double displaytotalcommand(string refe)
         {

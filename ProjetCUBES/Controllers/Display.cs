@@ -251,9 +251,26 @@ namespace ProjetCUBES.Controllers
             }
         }
         /// <summary>
+        /// Retourne une liste d'article en fonction d'une liste d'id
+        /// </summary>
+        [HttpGet]
+        public List<Article> getlistarticleinstock([FromQuery] int[] listOfIds)
+        {
+            using (Apply context = new Apply())
+            {
+                List<Article> list1 = new List<Article>();
+                foreach (int s in listOfIds)
+                {
+                    list1.Add(displayarticlebyid(s));
+                }
+                return list1;
+            }
+        }
+        /// <summary>
         /// Retourne une liste de nom de fournisseurs en fonction d'une liste d'id
         /// </summary>
         [HttpGet]
+
         public List<string> getlistnamesup([FromQuery] int[] listOfIds)
         {
             using (Apply context = new Apply())

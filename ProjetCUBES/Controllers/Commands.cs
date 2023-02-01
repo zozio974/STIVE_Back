@@ -422,14 +422,19 @@ namespace ProjetCUBES.Controllers
                             string refe = getrefcom().ToString();
                             addlinecommandsup(stock.ID_Article, refe, auto.AddToStock, user.ID_User);
                             addcommand(refe, user.ID_User);
+                           
                         }
                     }
-                    return;
+                    
 
                 }
-                comm.Status_Comman = 2;
-                context.Update(comm);
-                context.SaveChanges();
+                else
+                {
+                    comm.Status_Comman = 2;
+                    context.Update(comm);
+                    context.SaveChanges();
+
+                }
 
             }
 
@@ -499,7 +504,7 @@ namespace ProjetCUBES.Controllers
                 foreach (LineCommand line in linecom)
                 {
                     Article article = context.Articles.Where(x => x.ID_Article == line.Id_article).First();
-                    if (article.StockActual < 0)
+                    if (article.StockActual < 0 && line.Id_status ==1)
                     {
                         return false;
                     }

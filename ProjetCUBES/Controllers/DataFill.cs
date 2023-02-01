@@ -35,7 +35,9 @@ namespace ProjetCUBES.Controllers
 
             return new String(stringChars);
         }
-
+        /// <summary>
+        /// Remplie la base de données avec un jeu de données représentative
+        /// </summary>
         [HttpPost]
 
         public void FillBDD() 

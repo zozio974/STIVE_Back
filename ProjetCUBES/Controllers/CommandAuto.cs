@@ -13,6 +13,9 @@ namespace ProjetCUBES.Controllers
     [Route("[controller]/[action]")]
     public class CommandAuto
     {
+        /// <summary>
+        ///  Passe la fonction commande automatique en off
+        /// </summary>
         [HttpPut]
         public void commandeauto_off()
         {
@@ -24,7 +27,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
-
+        /// <summary>
+        ///  Passe la fonction commande automatique en on
+        /// </summary>
         [HttpPut]
         public void commandeauto_on()
         {
@@ -36,7 +41,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
-
+        /// <summary>
+        ///  Change la quantité d'article commandé pour les rechargements automatiques
+        /// </summary>
         [HttpPut]
         public void quantiteaddtostock(int y)
         {
@@ -48,6 +55,9 @@ namespace ProjetCUBES.Controllers
                 context.SaveChanges();
             }
         }
+        /// <summary>
+        ///  Affiche la valeur de la variable pour les commandes automatique
+        /// </summary>
         [HttpGet]
         public int displayautovar()
         {

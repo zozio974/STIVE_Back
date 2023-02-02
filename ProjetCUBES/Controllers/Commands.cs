@@ -504,7 +504,7 @@ namespace ProjetCUBES.Controllers
                 foreach (LineCommand line in linecom)
                 {
                     Article article = context.Articles.Where(x => x.ID_Article == line.Id_article).First();
-                    if (article.StockActual < 0 && line.Id_status ==1)
+                    if (article.StockActual < 0 && comm.Status_Comman ==1)
                     {
                         return false;
                     }

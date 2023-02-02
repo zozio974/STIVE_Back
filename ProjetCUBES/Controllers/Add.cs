@@ -43,21 +43,28 @@ namespace ProjetCUBES.Controllers
         [HttpGet]
         public bool add_customersite(string login, string password, string name, string firstname)
         {
-
-            using (Apply context = new Apply())
+            try
             {
-                User newcust = new User();
-                newcust.LogInUser = login;
-                newcust.PassWordUser = password;
-                newcust.NameUser = name;
-                newcust.FirstNameUser = firstname;
-                newcust.Idjob = 5;
+                using (Apply context = new Apply())
+                {
+                    User newcust = new User();
+                    newcust.LogInUser = login;
+                    newcust.PassWordUser = password;
+                    newcust.NameUser = name;
+                    newcust.FirstNameUser = firstname;
+                    newcust.Idjob = 5;
 
 
-                context.Add(newcust);
-                context.SaveChanges();
-                return true;
+                    context.Add(newcust);
+                    context.SaveChanges();
+                    return true;
+                }
             }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            
 
         }
         /// <summary>

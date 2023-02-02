@@ -96,13 +96,22 @@ namespace ProjetCUBES.Controllers
         [HttpGet]
         public bool deletelinecommandsite(int ID)
         {
-            using (Apply context = new Apply())
+
+            try
             {
-                LineCommand line = context.LineCommands.Where(x => x.Id_LineCommande == ID).First();
-                context.Remove(line);
-                context.SaveChanges();
-                return true;
+                using (Apply context = new Apply())
+                {
+                    LineCommand line = context.LineCommands.Where(x => x.Id_LineCommande == ID).First();
+                    context.Remove(line);
+                    context.SaveChanges();
+                    return true;
+                }
             }
+            catch(Exception ex)
+            {
+                return false;
+            }
+            
         }
     }
 }

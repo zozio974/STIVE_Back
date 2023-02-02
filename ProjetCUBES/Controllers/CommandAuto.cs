@@ -68,6 +68,19 @@ namespace ProjetCUBES.Controllers
                 return auto.AutoRefill;
             }
         }
+        /// <summary>
+        ///  Affiche la valeur du montant ajouté au stock pour les commandes automatiques
+        /// </summary>
+        [HttpGet]
+        public int displayquantadd()
+        {
+
+            using (Apply context = new Apply())
+            {
+                Auto auto = context.Autos.Where(x => x.Id == 1).First();
+                return auto.AddToStock;
+            }
+        }
 
 
     }
